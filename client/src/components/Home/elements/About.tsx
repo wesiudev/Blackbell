@@ -1,27 +1,53 @@
-export const About = () => {
+export const AboutMe = () => {
     return(
-        <div className="about">
-            <div className="about__text">
-            <span>Moje</span><span>zamiłowanie</span><span>do</span><span>tworzenia</span><span>zaczęło</span><span>się</span>
-            </div>
-            <div className="about__text">
-            <span>od</span><span>2014</span><span>roku.</span><span>Był</span><span>to</span><span>świat</span><span>w</span><span>którym</span><span>się</span>    
-            </div>
-            <div className="about__text">
-            <span>odnalazłam.</span><span>Z</span><span>czasem</span><span>zaczęłam</span><span>brać</span><span>to</span><span>na</span>
-            </div>
-            <div className="about__text">
-            <span>poważnie,</span><span>aż</span><span>w</span><span>końcu</span><span>stało</span><span>się</span><span>to</span><span>dla</span><span>mnie</span>
-            </div>
-            <div className="about__text">
-            <span>metodą</span><span>na</span><span>życie.</span><span>Ze</span><span>wszystkiego</span><span>można</span>
-            </div>
-            <div className="about__text">
-            <span>czerpać</span><span>inspirację</span><span>jeśli</span><span>potrafi</span><span>się</span><span>patrzeć,</span>
-            </div>
-            <div className="about__text">
-            <span>a</span><span>co</span><span>więcej,</span><span><strong>widzieć.</strong></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-            </div>
+        <div className="about paddingLeft">
+            <AboutInput input={["Moje", "zamiłowanie", "do", "tworzenia", "zaczęło", "się"]}></AboutInput>
+            <AboutInput input={["w", "2014", "roku.", "Był", "to", "świat", "w", "którym", "się"]}></AboutInput>
+            <AboutInput input={["odnalazłam.","Z","czasem","zaczęłam","brać","to","na"]}></AboutInput>
+            <AboutInput input={["poważnie,","aż","w","końcu","stało","się","to","dla","mnie"]}></AboutInput>
+            <AboutInput input={["metodą","na","życie.","Ze","wszystkiego","można"]}></AboutInput>
+            <AboutInput input={["czerpać","inspirację","jeżeli","potrafi","się","patrzeć,"]}></AboutInput>
+            <AboutInput input={["a","co","więcej,","widzieć.","","","","","","","","","","","","","",""]}></AboutInput>
         </div>
+    )
+}
+
+export const AboutArt = () => {
+    return(
+        <div className="about paddingRight">
+            <AboutInput input={["W","swoich","projektach","staram","się","umieszczać"]}></AboutInput>
+            <AboutInput input={["myśli,","które","towarzyszą","mi","w","życiu","codziennym"]}></AboutInput>
+            <AboutInput input={[ "i","nie","tylko.","Tworzę","obrazy","inspirowane","światem"]}></AboutInput>
+            <AboutInput input={["przyrody,","okultyzmu","i","wnętrza","duchowego."]}></AboutInput>
+            <AboutInput input={["Oczywiście","znajdą","się","takie,","które","będą","czysto"]}></AboutInput>
+            <AboutInput input={["dekoracyjne."]}></AboutInput>
+
+        </div>
+    )
+}
+
+export const AboutRequest = () => {
+    return(
+        <div style={{margin:'50px auto', width:"70vw"}} className="about">
+            <p>Zajmuję się tworzeniem sztuki na zamówienie, </p>
+            <hr />
+            <p>w celu zakupu pracy tego typu zapraszam do kontaktu.</p>
+        </div>
+    )
+}
+
+type text = {
+    input: string[]
+}
+
+const AboutInput = (arrayOfText: text) => {
+    return(
+        <>
+            <span className="about__text">
+                {arrayOfText.input.map((item) => (
+                    <div>{item}</div>
+                ))}
+            </span>
+        </>
     )
 }

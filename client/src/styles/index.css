@@ -9,7 +9,7 @@ header {
   top: 0;
   left: 0;
   background-color: white;
-  z-index: 5;
+  z-index: 10;
   box-shadow: 3px 0px 12px black;
 }
 header .content {
@@ -106,13 +106,12 @@ header .content .nav__socials {
 }
 header .content .nav__socials__items {
   justify-content: space-between;
-  width: 200px;
+  width: 150px;
   display: flex;
   align-items: center;
   flex-direction: row;
 }
 header .content .nav__socials__items__item {
-  padding: 0 25px;
   display: flex;
   align-items: center;
 }
@@ -134,11 +133,12 @@ header .content .nav__socials__language {
   font-family: "Titillium Web", sans-serif;
   font-weight: 600;
   font-size: 22px;
-  padding: 0 25px;
+  padding-left: 25px;
 }
 @media screen and (max-width: 1024px) {
   header .content .nav__socials__language {
     font-size: 3vh;
+    padding-left: 0px;
   }
 }
 header .content .nav__close {
@@ -221,15 +221,15 @@ header .content .open span {
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px) {
   .wrapper {
-    width: 80%;
+    width: 90vw;
   }
 }
-@media screen and (min-width: 481px) and (max-width: 1023px) {
+@media screen and (min-width: 766px) and (max-width: 1023px) {
   .wrapper {
-    width: 80%;
+    width: 95vw;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 765px) {
   .wrapper {
     width: 100%;
   }
@@ -240,15 +240,50 @@ header .content .open span {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  position: relative;
 }
 @media screen and (max-width: 1365px) {
   .wrapper__about {
     flex-direction: column-reverse;
   }
 }
+.wrapper__request {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+@media screen and (max-width: 766px) {
+  .wrapper__request {
+    flex-direction: column;
+    height: 100vh;
+  }
+}
+.wrapper__request img {
+  height: 100%;
+  box-shadow: 3px 3px 12px black;
+}
+@media screen and (max-width: 766px) {
+  .wrapper__request img {
+    height: 50%;
+    margin: 35px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .paddingLeft {
+    padding-left: 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .paddingRight {
+    padding-right: 50px;
+  }
+}
 
 .about {
-  margin: 0 0 0 50px;
   width: 570px;
   font-weight: 700;
   font-family: "Titillium Web", sans-serif;
@@ -258,16 +293,33 @@ header .content .open span {
     margin: 0 auto 170px auto;
   }
 }
-@media screen and (min-width: 481px) and (max-width: 766px) {
+@media screen and (min-width: 481px) and (max-width: 1365px) {
   .about {
-    width: 550px !important;
+    width: 480px;
     margin: 0 0 170px 0;
   }
 }
 @media screen and (max-width: 480px) {
   .about {
     width: 95vw !important;
-    margin: 0 0 170px 0;
+    margin: 0 0 100px 0;
+  }
+}
+.about hr {
+  width: 33%;
+}
+.about p {
+  font-size: 2vw;
+  text-align: center;
+}
+@media screen and (max-width: 480px) {
+  .about p {
+    font-size: 5vw;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 1023px) {
+  .about p {
+    font-size: 4vw;
   }
 }
 .about span {
@@ -283,10 +335,27 @@ header .content .open span {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 @media screen and (max-width: 480px) {
   .about__text {
     flex-wrap: wrap;
+  }
+}
+@media screen and (min-width: 481px) {
+  .about__text div {
+    font-size: 2vh;
+  }
+}
+@media screen and (max-width: 480px) {
+  .about__text div {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1365px) {
+  .columnReverse {
+    flex-direction: column;
   }
 }
 
@@ -294,6 +363,42 @@ header .content .open span {
   display: flex;
   justify-content: center;
   position: relative;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+  padding: 0;
+}
+@media screen and (min-width: 1023px) {
+  .parallax .borders {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .parallax .borders .border {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  .parallax .borders .border::before {
+    position: absolute;
+    content: "";
+    height: 300px;
+    width: 300px;
+    left: -35px;
+    top: -35px;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+  }
+  .parallax .borders .border::after {
+    position: absolute;
+    content: "";
+    height: 300px;
+    width: 300px;
+    right: -34px;
+    bottom: -34px;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+  }
 }
 
 .gallery {
@@ -307,6 +412,7 @@ header .content .open span {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  z-index: 2;
 }
 .headline h1 {
   font-size: 5vh;
@@ -319,8 +425,92 @@ header .content .open span {
   width: 300px;
 }
 
+.box {
+  width: 250px;
+  height: 70px;
+  position: relative;
+  background: #f0f0f0;
+  display: inline-block;
+  margin: 0 auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box .actionBtn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: black;
+  color: white;
+  font-weight: 700;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.5vw;
+  padding: 10px 0px 10px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: 3px 12px 12px rgb(0, 0, 0);
+}
+@media screen and (max-width: 1023px) {
+  .box .actionBtn {
+    font-size: 3vh;
+  }
+}
+.box .actionBtn img {
+  margin-top: 2px;
+  padding: 0 30px;
+  height: 25px;
+}
+.box span {
+  position: absolute;
+  display: block;
+  background: rgb(255, 255, 255);
+  transition: all 0.125s linear;
+}
+.box .bottom {
+  width: 100%;
+  height: 5px;
+  transform: scaleX(0);
+}
+.box .right {
+  width: 5px;
+  height: 100%;
+  transform: scaleY(0);
+}
+.box .right {
+  top: 0;
+  right: 0;
+  transition-delay: 0.25s;
+  transform-origin: top left;
+}
+.box .bottom {
+  bottom: 0;
+  right: 0;
+  transition-delay: 0.125s;
+  transform-origin: top right;
+}
+.box:hover .right {
+  transition-delay: 0.125s;
+}
+.box:hover .bottom {
+  transition-delay: 0.25s;
+}
+.box:hover .bottom {
+  transform: scaleX(1);
+}
+.box:hover .right {
+  transform: scaleY(1);
+}
+
 body, html {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }/*# sourceMappingURL=index.css.map */

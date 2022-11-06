@@ -8,6 +8,7 @@ import instagramWhiteIcon from '../../common/images/instagramWhite.png'
 import youtubeWhiteIcon from '../../common/images/youtubeWhite.png'
 import {useState} from 'react'
 import useWindowDimensions from '../../common/hooks/useWindowDimensions'
+import { Link } from 'react-router-dom'
 const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const { width } = useWindowDimensions();
@@ -27,21 +28,21 @@ const Header = () => {
     return(
         <header>
             <div className="content">
-                <div className="logo">
-                    <img src={isMenuOpen ? logoWhite : logo} alt="" /><span style={isMenuOpen ? {color:'white'} : {color:'black'}}>BlackBell</span>
-                </div>
+                <Link className="logo" to="/">
+                        <img src={isMenuOpen ? logoWhite : logo} alt="" /><span style={isMenuOpen ? {color:'white'} : {color:'black'}}>BlackBell</span>
+                </Link>
                 { width < 1023 ? <div className="open" onClick={() => setMenuOpen(!isMenuOpen)}><span></span><span></span><span></span></div> : null }
                 <div className={handleNavVisibility()}>
                     <div className="nav__items">
-                        <div className="nav__items__item">
+                        <Link to="/gallery" className="nav__items__item">
                             GALERIA
-                        </div>
-                        <div className="nav__items__item">
+                        </Link>
+                        <Link to="/shop" className="nav__items__item">
                             SKLEP
-                        </div>
-                        <div className="nav__items__item">
+                        </Link>
+                        <Link to="/contact" className="nav__items__item">
                             KONTAKT
-                        </div>
+                        </Link>
                     </div>
                     <div className="nav__socials">
                         <div className="nav__socials__items">

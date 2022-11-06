@@ -7,6 +7,7 @@ type parallax = {
     width: number
     speed: number
     correctWidth: boolean
+    borders: boolean
 }
 
 export const Parallax = (props: parallax) => {
@@ -18,7 +19,7 @@ export const Parallax = (props: parallax) => {
         if (width<1366) {
             return '100%'
         }else {
-            return props.width + '%'
+            return props.width + 'vw'
         }
     }
     }
@@ -37,9 +38,8 @@ export const Parallax = (props: parallax) => {
                     layers={[{ image: props.image, speed: props.speed }]}
                     className="aspect-[2/1]"
                 />
-            <div className='borders'>
-                <div className="left"></div>
-                <div className="right"></div>
+            <div className={props.borders ? "borders" : "" }>
+                <div className="border"></div>
             </div>
             </div>
         </>
