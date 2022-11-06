@@ -6,7 +6,6 @@ import youtubeIcon from '../../common/images/youtube.png'
 import facebookWhiteIcon from '../../common/images/facebookWhite.png'
 import instagramWhiteIcon from '../../common/images/instagramWhite.png'
 import youtubeWhiteIcon from '../../common/images/youtubeWhite.png'
-import cartIcon from '../../common/images/cart.png'
 import {useState} from 'react'
 import useWindowDimensions from '../../common/hooks/useWindowDimensions'
 const Header = () => {
