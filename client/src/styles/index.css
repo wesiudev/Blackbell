@@ -451,12 +451,17 @@ header .content .open span {
   align-items: center;
   justify-content: space-between;
   position: relative;
-  box-shadow: 3px 12px 12px rgb(0, 0, 0);
+  box-shadow: 3px 3px 12px rgb(0, 0, 0);
+  transition: 0.3s;
 }
 @media screen and (max-width: 1023px) {
   .box .actionBtn {
     font-size: 3vh;
   }
+}
+.box .actionBtn:hover {
+  box-shadow: 0px 10px 12px rgb(0, 0, 0);
+  transition: 0.3s;
 }
 .box .actionBtn img {
   margin-top: 2px;
@@ -467,7 +472,7 @@ header .content .open span {
   position: absolute;
   display: block;
   background: rgb(255, 255, 255);
-  transition: all 0.125s linear;
+  transition: all 0.075s linear;
 }
 .box .bottom {
   width: 100%;
@@ -482,26 +487,71 @@ header .content .open span {
 .box .right {
   top: 0;
   right: 0;
-  transition-delay: 0.25s;
+  transition-delay: 0.15s;
   transform-origin: top left;
 }
 .box .bottom {
   bottom: 0;
   right: 0;
-  transition-delay: 0.125s;
+  transition-delay: 0.075s;
   transform-origin: top right;
 }
 .box:hover .right {
-  transition-delay: 0.125s;
+  transition-delay: 0.075s;
 }
 .box:hover .bottom {
-  transition-delay: 0.25s;
+  transition-delay: 0.15s;
 }
 .box:hover .bottom {
   transform: scaleX(1);
 }
 .box:hover .right {
   transform: scaleY(1);
+}
+
+.loader {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  z-index: 15;
+}
+.loader__content {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.loader__content__logo {
+  overflow: visible;
+}
+.loader__content__logo__triangle {
+  fill: none;
+  stroke: white;
+  stroke-width: 30;
+  stroke-miterlimit: 10;
+}
+.loader__content__text {
+  margin: -30px auto 0 auto;
+  height: 150px;
+  overflow-y: hidden;
+}
+.loader__content__text h1 {
+  transform: translateY(-200px);
+  font-size: 48px;
+  color: white;
+  font-weight: 700;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.easeOut {
+  opacity: 0;
+  transition: 0.5s;
 }
 
 body, html {
