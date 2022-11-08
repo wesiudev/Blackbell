@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap');
+
 
 header{
     width:100%;
@@ -31,7 +31,6 @@ header{
             font-size: 44px;
             font-weight: 700;
             letter-spacing: -3px;
-            font-family: 'Titillium Web', sans-serif;
             margin-right:50px;
             position: relative;
             z-index:5;
@@ -75,7 +74,6 @@ header{
                         font-size: 5vh;
                     }
                     margin: 0 10px;
-                    font-family: 'Titillium Web', sans-serif;
                     font-weight: 600;
                     font-size: 22px;
                 }
@@ -109,7 +107,6 @@ header{
                     }
                 }
                 &__language{
-                    font-family: 'Titillium Web', sans-serif;
                     font-weight: 600;
                     font-size: 22px;
                     padding-left:25px;

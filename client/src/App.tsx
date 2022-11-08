@@ -21,7 +21,7 @@ export default function App(){
       <Header/>
       {isFirstLoad ? <Loader visible={true}/> : <Loader visible={false}/>}
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={() => Home(isFirstLoad)} />
           <Route path="/gallery" exact component={Gallery} />
           <Route path="/shop" exact component={Shop} />
           <Route path="/contact" exact component={Contact} />

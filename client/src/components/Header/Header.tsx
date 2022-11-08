@@ -6,13 +6,12 @@ import youtubeIcon from '../../common/images/youtube.png'
 import facebookWhiteIcon from '../../common/images/facebookWhite.png'
 import instagramWhiteIcon from '../../common/images/instagramWhite.png'
 import youtubeWhiteIcon from '../../common/images/youtubeWhite.png'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import useWindowDimensions from '../../common/hooks/useWindowDimensions'
 import { Link } from 'react-router-dom'
 const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const { width } = useWindowDimensions();
-
     function handleNavVisibility() {
         let className = "hidden";
         if (width<=1023 && isMenuOpen) {

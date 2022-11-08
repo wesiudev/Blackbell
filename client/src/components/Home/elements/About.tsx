@@ -44,8 +44,8 @@ const AboutInput = (arrayOfText: text) => {
     return(
         <>
             <span className="about__text">
-                {arrayOfText.input.map((item) => (
-                    <div>{item}</div>
+                {arrayOfText.input.map((item, idx) => (
+                    <div key={idx}>{item}</div>
                 ))}
             </span>
         </>

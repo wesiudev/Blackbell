@@ -1,5 +1,5 @@
 import send from '../../../common/images/send.png'
-
+import {Link} from 'react-router-dom'
 type button = {
     text: string
 }
@@ -7,14 +7,15 @@ type button = {
 export const Button = (props: button) => {
     return(
         <>
+            <Link to="/contact">
             <div className="box">
             <button className="actionBtn">{props.text} <img src={send} alt="" /> 
             </button>
-               
                 <span className="right"></span>
                 <span className="bottom"></span>
 
-            </div> 
+            </div>
+            </Link> 
         </>
     )
 }

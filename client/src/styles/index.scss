@@ -1,11 +1,24 @@
 @import '../components/Header/header';
 @import '../components/Home/home';
 @import '../components/Loader/loader';
+@import '../components/Gallery/gallery';
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap');
 
 body,html{
     box-sizing:border-box;
     padding:             0;
     margin:              0;
+    font-family: 'Titillium Web', sans-serif;
+    &::-webkit-scrollbar-thumb {
+        background-color: black;
+        border:1px solid white;
+    }
+    &::-webkit-scrollbar {
+        border-left:1px solid rgba(128, 128, 128, 0.5);
+        width: 10px;
+        background-color: white;
+    }
 }
 a{
     text-decoration: none;
