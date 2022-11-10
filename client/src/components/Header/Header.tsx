@@ -9,7 +9,13 @@ import youtubeWhiteIcon from '../../common/images/youtubeWhite.png'
 import {useState, useEffect} from 'react'
 import useWindowDimensions from '../../common/hooks/useWindowDimensions'
 import { Link } from 'react-router-dom'
-const Header = () => {
+
+type header = {
+    setEngContent: Function
+    isEngContent: boolean
+}
+
+const Header = (props: header) => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const { width } = useWindowDimensions();
     function handleNavVisibility() {
@@ -34,13 +40,13 @@ const Header = () => {
                 <div className={handleNavVisibility()}>
                     <div className="nav__items">
                         <Link to="/gallery" className="nav__items__item">
-                            GALERIA
+                            {props.isEngContent ? 'GALLERY' : 'GALERIA'}
                         </Link>
                         <Link to="/shop" className="nav__items__item">
-                            SKLEP
+                            {props.isEngContent ? 'SHOP' : 'SKLEP'}
                         </Link>
                         <Link to="/contact" className="nav__items__item">
-                            KONTAKT
+                            {props.isEngContent ? 'CONTACT' : 'KONTAKT'}
                         </Link>
                     </div>
                     <div className="nav__socials">
@@ -49,7 +55,7 @@ const Header = () => {
                             <div className="nav__socials__items__item"><img src={isMenuOpen && width<=1023 ? instagramWhiteIcon : instagramIcon} alt="" /> </div>
                             <div className="nav__socials__items__item"><img src={isMenuOpen && width<=1023 ? youtubeWhiteIcon : youtubeIcon} alt="" /> </div>
                         </div>
-                        <div className="nav__socials__language">ENGLISH</div>
+                        <button onClick={() => props.setEngContent(!props.isEngContent)} className="nav__socials__language">{props.isEngContent ? 'POLSKI' : 'ENGLISH' }</button>
                     </div>
                     {isMenuOpen ? <div className='nav__close' onClick={() => setMenuOpen(!isMenuOpen)}><span onClick={() => setMenuOpen(!isMenuOpen)} ></span></div> : null}
                 </div>

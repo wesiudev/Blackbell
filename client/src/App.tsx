@@ -11,6 +11,8 @@ export default function App(){
 
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
 
+  const [isEngContent, setEngContent] = useState<boolean>(false);
+
   setTimeout(() => {
     setIsFirstLoad(false)
   }, 2800);
@@ -18,11 +20,11 @@ export default function App(){
   return (
     <ParallaxProvider>
       <BrowserRouter>
-      <Header/>
+      <Header isEngContent={isEngContent} setEngContent={setEngContent}/>
       {isFirstLoad ? <Loader visible={true}/> : <Loader visible={false}/>}
         <Switch>
-          <Route path="/" exact component={() => Home(isFirstLoad)} />
-          <Route path="/gallery" exact component={Gallery} />
+          <Route path="/" exact component={() => Home(isFirstLoad, isEngContent)} />
+          <Route path="/gallery" exact component={() => Gallery(isEngContent)} />
           <Route path="/shop" exact component={Shop} />
           <Route path="/contact" exact component={Contact} />
         </Switch>

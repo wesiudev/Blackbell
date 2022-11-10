@@ -1,6 +1,6 @@
 import { Headline } from "./elements/Headline"
 import { Parallax }from "./elements/Parallax"
-import { AboutMe, AboutArt, AboutRequest } from "./elements/About"
+import { AboutMe, AboutArt, AboutRequest, AboutMeEng, AboutArtEng, AboutRequestEng } from "./elements/About"
 import {motion} from 'framer-motion'
 import heroImg from '../../common/images/heroImg.png'
 import img0 from '../../common/images/img0.png'
@@ -10,7 +10,7 @@ import img2 from '../../common/images/8.png'
 import Button from "./elements/Button"
 import Gallery from "../Gallery/Gallery"
 import Footer from "./elements/Footer"
-const Home = (isFirstLoad:boolean) => {
+const Home = (isFirstLoad:boolean, isEngContent: boolean) => {
 
     const opacity = () => {
         if (isFirstLoad) {
@@ -37,25 +37,26 @@ const Home = (isFirstLoad:boolean) => {
     return(
         <>
         <motion.div variants={animateContent} initial="hidden" animate="visible" className="wrapper">
-            <Headline text="SZTUKA" />
+            <Headline text={isEngContent ? 'ART' : 'SZTUKA'} />
             <Parallax image={heroImg} height={50} width={80} speed={15} correctWidth={false} borders={true}/>
-            <Headline text="O MNIE"/>
+            <Headline text={isEngContent ? 'ABOUT ME' : 'O MNIE'}/>
             <div className="wrapper__about">
                 <Parallax image={artist} height={80} width={55} speed={15} correctWidth={true} borders={false}/>
-                <AboutMe />
+                {isEngContent ? <AboutMeEng/> : <AboutMe/>}
             </div>
-            <Headline text="INSPIRACJE"/>
+            <Headline text={isEngContent ? 'INSPIRATION' : 'INSPIRACJA'}/>
             <div className="wrapper__about columnReverse">
-                <AboutArt />
+                {isEngContent ? <AboutArtEng/> : <AboutArt/>}
                 <Parallax image={img0} height={80} width={55} speed={15} correctWidth={true} borders={false}/>
             </div>
-            <Headline text="PRACE NA ZAMÓWIENIE"/>
+            <Headline text={isEngContent ? 'ART ON REQUEST' : 'PRACE NA ZAMÓWIENIE'}/>
             <div className="wrapper__request">
                 <img src={img1} alt="" />
                 <img src={img2} alt="" />
             </div>
-            <AboutRequest />
-            <Button text="Kontakt"/>
+            {isEngContent ? <AboutRequestEng/> : <AboutRequest/> }
+            
+            <Button text={isEngContent? "CONTACT" : "KONTAKT"}/>
         </motion.div>
         <Footer/>
         </>
