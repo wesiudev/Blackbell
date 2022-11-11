@@ -6,10 +6,10 @@ const router = express.Router();
 const secret = process.env.JWT_SECRET || "test";
 
 router.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
+  const { userName, password } = req.body;
 
   try {
-    const oldUser = await User.findOne({ email });
+    const oldUser = await User.findOne({ userName });
 
     if (!oldUser) throw Error("Użytkownik o takim adresie e-mail nie istnieje");
 
@@ -18,9 +18,13 @@ router.post("/signin", async (req, res) => {
     if (!isPasswordCorrect)
       throw Error("Podano błędny adres e-mail lub hasło.");
 
-    const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { userName: oldUser.userName, id: oldUser._id },
+      secret,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(200).json({
       result: oldUser,
@@ -35,34 +39,60 @@ router.post("/signin", async (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { email, password, userName, repeatPassword, isSalon, phoneNumber } =
-    req.body;
+  const { password, userName } = req.body;
 
   try {
-    const oldUser = await User.findOne({ email });
-
-    const badPass = password !== repeatPassword;
+    const oldUser = await User.findOne({ userName });
 
     if (oldUser) throw Error("Istnieje już konto z podanym adresem e-mail.");
-
-    if (badPass) throw Error("Hasła nie moga się różnić.");
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await User.create({
-      email,
-      password: hashedPassword,
       userName: `${userName}`,
-      isSalon,
-      phoneNumber,
-      allowReservations: false,
-      acceptComments: false,
+      password: hashedPassword,
     });
 
-    const token = jwt.sign({ email: result.email, id: result._id }, secret, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { userName: result.userName, id: result._id },
+      secret,
+      {
+        expiresIn: "1h",
+      }
+    );
+    console.log(result);
     res.status(201).json({ result, token });
+  } catch (error) {
+    res.status(500).json({
+      msg: error.message,
+    });
+  }
+});
+
+router.post("/signinadmin", async (req, res) => {
+  const { userName, password } = req.body;
+
+  try {
+    const oldUser = await User.findOne({ userName });
+
+    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+
+    if (!isPasswordCorrect)
+      throw Error("Podano błędny adres e-mail lub hasło.");
+
+    const token = jwt.sign(
+      { userName: oldUser.userName, id: oldUser._id },
+      secret,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    res.status(200).json({
+      result: oldUser,
+      token,
+      msg: "Logowanie zakończyło się sukcesem.",
+    });
   } catch (error) {
     res.status(500).json({
       msg: error.message,

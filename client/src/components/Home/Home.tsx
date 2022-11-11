@@ -9,7 +9,7 @@ import img1 from '../../common/images/6.png'
 import img2 from '../../common/images/8.png'
 import Button from "./elements/Button"
 import Gallery from "../Gallery/Gallery"
-import Footer from "./elements/Footer"
+import Footer from "../Footer/Footer"
 const Home = (isFirstLoad:boolean, isEngContent: boolean) => {
 
     const opacity = () => {
@@ -58,7 +58,6 @@ const Home = (isFirstLoad:boolean, isEngContent: boolean) => {
             
             <Button text={isEngContent? "CONTACT" : "KONTAKT"}/>
         </motion.div>
-        <Footer/>
         </>
     )
 }
