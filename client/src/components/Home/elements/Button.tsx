@@ -7,7 +7,7 @@ type button = {
 export const Button = (props: button) => {
     return(
         <>
-            <Link to="/contact">
+            <Link style={{marginBottom: "150px"}} to="/contact">
                 <div className="box">
                 <button className="actionBtn">{props.text} <img src={send} alt="" /> 
                 </button>

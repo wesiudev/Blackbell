@@ -16,6 +16,6 @@ API.interceptors.request.use((req) => {
 export const signIn = (userInput) => API.post("/api/user/signin", userInput);
 export const signUp = (userInput) => API.post("/api/user/signup", userInput);
 export const signInAdmin = (userInput) =>
-  API.post("/api/user/signinadmin", userInput);
+  API.post("/api/owner/signin", userInput);
 export const fetchUser = (userInput) =>
   API.post("/api/user/fetchUser", userInput);

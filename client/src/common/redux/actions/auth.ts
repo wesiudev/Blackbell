@@ -1,4 +1,4 @@
-import { AUTH, GET_ERROR, FETCH_USER } from "./actionTypes";
+import { AUTH, GET_ERROR } from "./actionTypes";
 import * as api from "../api/";
 import { clearErrors, getErrors } from "./error";
 

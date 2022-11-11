@@ -1,0 +1,140 @@
+@mixin center {
+    display:flex;
+    justify-content: space-between;
+    width:90%;
+    margin:25px auto 25px auto;
+}
+@mixin lines {
+    content: '';
+    position: absolute;
+    height:5px;
+    border-radius: 5px;
+    width:30px;
+    background-color: grey;
+}
+
+
+.admin_panel{
+    width:100%;
+    height:100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    .panel{
+        margin-top:50px;
+        background-color: white;
+        width:80%;
+        height:70vh;
+        box-shadow:3px 3px 8px black;
+        overflow-y: scroll;
+        &__headline{
+            @include center();
+            &__content{
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                button{
+                    margin-left:15px;
+                    border:none;
+                    position: relative;
+                    height:50px;
+                    width:50px;
+                    cursor: pointer;
+                    background-color: transparent;
+                    &::before{
+                        @include lines();
+                        left:10px;
+                        top:25px;
+                    }
+                    &::after{
+                        @include lines();
+                        transform: rotate(-90deg);
+                        transition: .5s;
+                        left:10px;
+                        top:25px;
+                    }
+                }
+                .rotate{
+                    &::before{
+                        @include lines();
+                        left:10px;
+                        top:25px;
+                    }
+                    &::after{
+                        @include lines();
+                        left:10px;
+                        top:25px;
+                        transform: rotate(360deg);
+                        transition: .5s;
+                    }
+                }
+            }
+        }
+        .height{
+            height:300px;
+        }
+        &__menu{
+            @include center();
+            height:0px;
+            transition: .5s;
+            overflow: hidden;
+            .opened{
+                transform: translateY(0%);
+                transition: .5s;
+                opacity:1;
+            }
+            &__content{
+                transform: translateY(-100%);
+                background-color: rgb(224, 224, 224);
+                width:100%;
+                height:100%;
+                transition: .5s;
+                opacity:0;
+                transition-delay:.5s;
+            }
+        }
+    }
+}
+
+.newProduct{
+    width:100%;
+    height:100%;
+    overflow-y: scroll;
+    &__content{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        &__info{
+            display:flex;
+            flex-direction: column;
+
+        }
+        &__inputs{
+            display:flex;
+            flex-wrap: wrap;
+            width:50%;
+            align-items: center;
+            &__input{
+                display:flex;
+                flex-direction: column;
+                margin:20px;
+            }
+        }
+    }
+}
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

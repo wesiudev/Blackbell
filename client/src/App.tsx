@@ -10,6 +10,7 @@ import { useState } from "react";
 import Loader from "./components/Loader/Loader";
 import './styles/index.css'
 import Footer from "./components/Footer/Footer";
+
 export default function App(){
 
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
@@ -21,19 +22,19 @@ export default function App(){
   }, 2800);
 
   return (
-    <ParallaxProvider>
-      <BrowserRouter>
-      <Header isEngContent={isEngContent} setEngContent={setEngContent}/>
-      {isFirstLoad ? <Loader visible={true}/> : <Loader visible={false}/>}
-        <Switch>
-          <Route path="/" exact component={() => Home(isFirstLoad, isEngContent)} />
-          <Route path="/gallery" exact component={() => Gallery(isEngContent)} />
-          <Route path="/shop" exact component={Shop} />
-          <Route path="/contact" exact component={Contact} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
-      </BrowserRouter>
-      <Footer/>
-    </ParallaxProvider>
+      <ParallaxProvider>
+        <BrowserRouter>
+        <Header isEngContent={isEngContent} setEngContent={setEngContent}/>
+        {isFirstLoad ? <Loader visible={true}/> : <Loader visible={false}/>}
+          <Switch>
+            <Route path="/" exact component={() => Home(isFirstLoad, isEngContent)} />
+            <Route path="/gallery" exact component={() => Gallery(isEngContent)} />
+            <Route path="/shop" exact component={Shop} />
+            <Route path="/contact" exact component={Contact} />
+            <Route path="/admin" component={Admin}/>
+          </Switch>
+        </BrowserRouter>
+        <Footer/>
+      </ParallaxProvider>
   );
 };

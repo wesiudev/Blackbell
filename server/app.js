@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 const productRoutes = require("./routes/api/product.js");
-const userRouter = require("./routes/api/user.js");
+const userRoutes = require("./routes/api/user.js");
+const ownerRoutes = require("./routes/api/owner.js");
 
 const app = express();
 
@@ -18,7 +19,8 @@ dotenv.config();
 const db = process.env.MONGO_URI;
 
 app.use("/api/products", productRoutes);
-app.use("/api/user", userRouter);
+app.use("/api/user", userRoutes);
+app.use("/api/owner", ownerRoutes);
 
 if (process.env.NODE_ENV !== "production") {
   const morgan = require("morgan");

@@ -20,7 +20,8 @@ export const AboutMeEng = () => {
             <AboutInput input={["Over","the","time","I","started","to", "take", "art", "seriously"]}></AboutInput>
             <AboutInput input={["and","it","became","my","method","for","living.","You","can"]}></AboutInput>
             <AboutInput input={["get","inspiration","from","everything","that","surruonds", "you,"]}></AboutInput>
-            <AboutInput input={["if","you're","able","to","look,","for","it","and","more","immportant","to","truly","see", "it"]}></AboutInput>
+            <AboutInput input={["if","you're","able","to","look","for","it,","and","more"]}></AboutInput>
+            <AboutInput input={["immportant,","to","actually","see", "it.","","","","","","","","","",""]}></AboutInput>
         </div>
     )
 }

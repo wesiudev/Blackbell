@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { signInAdmin } from '../../common/redux/actions/auth';
-import Footer from '../Footer/Footer';
+import { signInAdmin } from '../../common/redux/actions/ownerAuth';
+import AdminTools from '../AdminTools/AdminTools';
+
 const Admin = () => {
     const [{userName, password}, setUserInput] = useState<{userName: string, password:string}>({userName:'', password:''});
 
@@ -24,11 +25,19 @@ const Admin = () => {
               }
             )
           );
+          setTimeout(() => {
+            setUser(JSON.parse(localStorage.getItem("profile") as string))
+          }, 1000);
         }
 
+    const [user, setUser] = useState<any>(
+        JSON.parse(localStorage.getItem("profile") as string)
+    );
+      
     return(
     <>
-        <div className="admin">
+    {!user ?  
+    <div className="admin">
             <div className="admin__wrapper">
                 <div className="admin__wrapper__headline">
                     <h1>Zarządzanie sklepem</h1>
@@ -55,6 +64,9 @@ const Admin = () => {
                 </div>
             </div>
         </div>
+        : 
+        <AdminTools />
+        }
     </>
     )
 }
