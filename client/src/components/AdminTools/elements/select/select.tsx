@@ -16,7 +16,7 @@ const Select = ({
   const handleSelectClick = (itemId: string, itemName: string) => {
     setSelectedItem({ itemId, itemName });
     setMenuOpen(false);
-    onSelect({ itemId, itemName });
+    onSelect({ category: itemName });
   };
 
   const toggleMenuOpen = (): void => setMenuOpen(!menuOpen); 

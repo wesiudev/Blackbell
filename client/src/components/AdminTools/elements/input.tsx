@@ -1,6 +1,7 @@
 type InputProps = {
     name: string
     label: string
+    change: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const Input = (props: InputProps) => {
@@ -8,7 +9,7 @@ const Input = (props: InputProps) => {
         <>
             <div className="newProduct__content__inputs__input">
                 <label htmlFor={props.name}>{props.label}</label>
-                <input type="text" name={props.name} />
+                <input onChange={props.change} type="text" name={props.name} />
             </div>
         </>
     )

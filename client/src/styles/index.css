@@ -929,8 +929,9 @@ header .content .open span {
 }
 
 .admin_panel {
+  margin-top: 95px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   -webkit-animation: gradient 15s ease infinite;
@@ -938,20 +939,28 @@ header .content .open span {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 50px 0;
+}
+.admin_panel hr {
+  background-color: rgb(53, 53, 53);
+  height: 1px;
+  box-shadow: 0px 0px transparent;
+  width: 90%;
 }
 .admin_panel .panel {
-  margin-top: 50px;
-  background-color: white;
+  background-color: rgb(207, 231, 245);
   width: 80%;
-  height: 70vh;
+  min-height: 80%;
   box-shadow: 3px 3px 8px black;
-  overflow-y: scroll;
 }
 .admin_panel .panel__headline {
   display: flex;
   justify-content: space-between;
   width: 90%;
   margin: 25px auto 25px auto;
+}
+.admin_panel .panel__headline h1 {
+  color: rgb(32, 32, 32);
 }
 .admin_panel .panel__headline__content {
   display: flex;
@@ -973,7 +982,7 @@ header .content .open span {
   height: 5px;
   border-radius: 5px;
   width: 30px;
-  background-color: grey;
+  background-color: rgb(32, 32, 32);
   left: 10px;
   top: 25px;
 }
@@ -983,7 +992,7 @@ header .content .open span {
   height: 5px;
   border-radius: 5px;
   width: 30px;
-  background-color: grey;
+  background-color: rgb(32, 32, 32);
   transform: rotate(-90deg);
   transition: 0.5s;
   left: 10px;
@@ -995,7 +1004,7 @@ header .content .open span {
   height: 5px;
   border-radius: 5px;
   width: 30px;
-  background-color: grey;
+  background-color: rgb(32, 32, 32);
   left: 10px;
   top: 25px;
 }
@@ -1005,14 +1014,15 @@ header .content .open span {
   height: 5px;
   border-radius: 5px;
   width: 30px;
-  background-color: grey;
+  background-color: rgb(32, 32, 32);
   left: 10px;
   top: 25px;
   transform: rotate(360deg);
   transition: 0.5s;
 }
 .admin_panel .panel .height {
-  height: 300px;
+  -webkit-animation: ease-in height 0.5s forwards;
+          animation: ease-in height 0.5s forwards;
 }
 .admin_panel .panel__menu {
   display: flex;
@@ -1020,7 +1030,6 @@ header .content .open span {
   width: 90%;
   margin: 25px auto 25px auto;
   height: 0px;
-  transition: 0.5s;
   overflow: hidden;
 }
 .admin_panel .panel__menu .opened {
@@ -1030,18 +1039,14 @@ header .content .open span {
 }
 .admin_panel .panel__menu__content {
   transform: translateY(-100%);
-  background-color: rgb(224, 224, 224);
+  background-color: white;
   width: 100%;
-  height: 100%;
   transition: 0.5s;
   opacity: 0;
-  transition-delay: 0.5s;
 }
 
 .newProduct {
   width: 100%;
-  height: 100%;
-  overflow-y: scroll;
 }
 .newProduct__content {
   display: flex;
@@ -1050,18 +1055,80 @@ header .content .open span {
 }
 .newProduct__content__info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  position: relative;
+  flex-wrap: wrap;
+}
+.newProduct__content__info div ol {
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+.newProduct__content__info input {
+  margin: 20px;
+  position: relative;
+  overflow: visible;
+  height: 100px;
+  color: transparent;
+}
+.newProduct__content__info input::before {
+  height: 50px;
+  width: 225px;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgb(187, 226, 248);
+  border: 1px solid rgb(145, 206, 241);
+}
+.newProduct__content__info input::after {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  color: black;
+  content: "Dodaj zdjęcie";
+  font-size: large;
 }
 .newProduct__content__inputs {
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
   align-items: center;
 }
 .newProduct__content__inputs__input {
   display: flex;
   flex-direction: column;
   margin: 20px;
+}
+
+.categories {
+  width: 100%;
+}
+.categories__content {
+  display: flex;
+  flex-direction: column;
+}
+.categories__content__list {
+  flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 5px;
+}
+.categories__content__list__item {
+  height: 20px;
+  margin: 3px 5px;
+  padding: 5px 8px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.categories__content__new {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.categories__content__new input {
+  width: 200px;
 }
 
 @keyframes gradient {
@@ -1075,18 +1142,40 @@ header .content .open span {
     background-position: 0% 50%;
   }
 }
+@-webkit-keyframes height {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 50%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+@keyframes height {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 50%;
+  }
+  100% {
+    height: 100%;
+  }
+}
 .select {
   width: 225px;
   height: 50px;
   position: relative;
   z-index: 5;
-  margin: 25px;
+  margin: 20px;
 }
 .select__chosen {
   font-size: large;
-  color: rgb(0, 0, 0) !important;
-  border: 1px solid rgb(145, 145, 145);
-  background-color: rgb(185, 185, 185);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(145, 206, 241);
+  background-color: rgb(187, 226, 248);
   padding: 12px;
   display: flex;
   justify-content: space-between;
@@ -1120,7 +1209,7 @@ header .content .open span {
   max-height: 150px;
 }
 .select__menu--opened::-webkit-scrollbar-thumb {
-  background-color: rgb(155, 155, 155);
+  background-color: rgb(187, 226, 248);
   border-radius: 25px;
 }
 .select__menu--opened::-webkit-scrollbar {
@@ -1132,7 +1221,7 @@ header .content .open span {
   padding: 12px;
   top: 0;
   position: relative;
-  background-color: rgb(185, 185, 185);
+  background-color: rgb(187, 226, 248);
   color: rgb(0, 0, 0);
   cursor: pointer;
   display: flex;
@@ -1168,130 +1257,6 @@ header .content .open span {
   top: 8px;
   left: 5px;
   transform: rotate(120deg);
-}
-
-.editor {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 10;
-}
-.editor__content {
-  padding: 80px 20px 50px 20px;
-  width: 500px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex-direction: column;
-  box-shadow: 6px 6px 18px 0px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(128, 128, 128, 0.8);
-}
-@media screen and (max-width: 1024px) {
-  .editor__content {
-    width: 250px;
-  }
-}
-.editor__content__tools {
-  margin-top: 5px;
-}
-.editor__content__tools__menager {
-  margin-top: 50px;
-  height: 10px;
-  width: 450px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-@media screen and (max-width: 1024px) {
-  .editor__content__tools__menager {
-    width: 225px;
-  }
-}
-.editor__content__tools__menager .buttons .btnCancel {
-  border: none;
-  padding: 5px 15px;
-  margin-right: 5px;
-  background-color: rgb(126, 126, 126);
-  border: 1px solid rgb(114, 114, 114);
-  border-radius: 5px;
-  color: white;
-  font-family: "cocoregular";
-}
-.editor__content__tools__menager .buttons button {
-  border: none;
-  padding: 5px 15px;
-  background-color: rgb(103, 200, 103);
-  border: 1px solid rgb(38, 146, 38);
-  border-radius: 5px;
-  color: white;
-  font-family: "cocoregular";
-}
-.editor__content::before {
-  position: absolute;
-  content: "Dopasuj zdjęcie";
-  left: 45px;
-  top: 25px;
-  font-family: "cocoregular";
-  font-size: 22px;
-  color: rgb(54, 54, 54);
-}
-@media screen and (max-width: 1024px) {
-  .editor__content::before {
-    left: 30px;
-  }
-}
-.editor__content__wrapper {
-  width: 450px;
-  height: 450px;
-  border: 1px solid rgb(128, 128, 128);
-  overflow: hidden;
-  position: relative;
-  cursor: move;
-}
-@media screen and (max-width: 1024px) {
-  .editor__content__wrapper {
-    width: 225px;
-    height: 225px;
-  }
-}
-.editor__content__wrapper__image {
-  display: flex;
-  justify-content: center;
-}
-.editor__content__wrapper__image__circle {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
-.editor__content__wrapper__image img {
-  z-index: 2;
-  height: 450px;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  position: relative;
-}
-@media screen and (max-width: 1024px) {
-  .editor__content__wrapper__image img {
-    height: 225px;
-  }
 }
 
 body, html {
