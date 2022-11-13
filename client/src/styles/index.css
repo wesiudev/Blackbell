@@ -1127,7 +1127,15 @@ header .content .open span {
   flex-direction: column;
   margin: 10px;
 }
+.categories__content__new__row button {
+  padding: 6px 12px;
+  margin-left: 8px;
+  background-color: rgb(187, 226, 248);
+  border: 1px solid rgb(145, 206, 241);
+  border-radius: 3px;
+}
 .categories__content__new input {
+  padding: 5px;
   width: 200px;
 }
 
@@ -1228,7 +1236,7 @@ header .content .open span {
   align-items: center;
 }
 .select__item:hover {
-  background-color: rgb(79, 79, 79);
+  background-color: rgb(218, 235, 245);
 }
 .select__item--checked {
   width: 18px;

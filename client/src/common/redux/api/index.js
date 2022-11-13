@@ -19,3 +19,6 @@ export const signInAdmin = (userInput) =>
   API.post("/api/owner/signin", userInput);
 export const fetchUser = (userInput) =>
   API.post("/api/user/fetchUser", userInput);
+//menage categories
+export const addCategory = (req) => API.post("/api/owner/category", req);
+export const removeCategory = (req) => API.post("/api/owner/category", req);

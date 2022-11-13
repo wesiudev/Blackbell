@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { signInAdmin } from '../../common/redux/actions/ownerAuth';
+import { signInAdmin } from '../../common/redux/actions/owner';
 import AdminTools from '../AdminTools/AdminTools';
 
 const Admin = () => {
