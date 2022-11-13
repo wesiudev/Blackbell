@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addCategory } from "../../../common/redux/actions/owner";
 import { useDispatch } from "react-redux";
 
@@ -6,7 +6,6 @@ export const MenageCategories = () => {
     const dispatch = useDispatch<any>();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile") as string));
     const [userInput, setUserInput] = useState<string>('');
-
     const categoryAddRequestHandler:  React.MouseEventHandler<HTMLButtonElement> = () => {
         const userName: string = user?.result?.userName
         dispatch(
@@ -22,6 +21,10 @@ export const MenageCategories = () => {
             setUser(JSON.parse(localStorage.getItem("profile") as string))
         }, 1000);
     }
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem("profile") as string))
+    }, [])
 
     return(
         <div className="categories">
@@ -43,3 +46,5 @@ export const MenageCategories = () => {
         </div>
     )
 }
+
+

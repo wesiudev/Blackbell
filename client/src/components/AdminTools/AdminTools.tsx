@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Headline from './elements/headline';
 import Menu from './elements/menu';
 
 const AdminTools = () => {
 
+    const { message } = useSelector((state: any) => state.error);
+
     const [isCategoryMenuOpened, setCategoryMenuOpened] = useState<boolean>(false);
     
     const [isNewProductOpened, setNewProductOpened] = useState<boolean>(false);
-    
+
     return(
         <div className="admin_panel">
             <div className="panel">

@@ -54,7 +54,7 @@ router.post("/category", async (req, res) => {
     switch (actionType) {
       case "ADD":
         if (categoryAlreadyExists.length > 0) {
-          msg = `Kategoria ${category} już istnieje.`;
+          throw Error(`Kategoria ${category} już istnieje.`);
         } else {
           await Owner.updateOne(
             { _id: user._id },
@@ -62,7 +62,6 @@ router.post("/category", async (req, res) => {
               $push: { categories: `${category}` },
             }
           );
-          msg = "Pomyślnie dodano kategorię.";
         }
         break;
       case "REMOVE":
