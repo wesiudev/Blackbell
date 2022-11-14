@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import Input from "./input";
 import Select from "./select/select";
+import { getCategories } from '../../../common/redux/actions/categories'
+import { useDispatch, useSelector } from "react-redux";
+
 
 type Product = {
   name: string | undefined;
@@ -13,10 +16,12 @@ type Product = {
 };
 
 export const NewProduct = () => {
+  const dispatch: any = useDispatch()
   const images: string[] = [];
   const [imageNames, setImageNames] = useState<any[]>([]);
   const [category, setCategory] = useState<string>('');
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile") as string));
+  const { categories } = useSelector((state: any) => state.categories);
   const [
     { name, price, description, quantity, size, color },
     setProductData,
@@ -47,21 +52,18 @@ export const NewProduct = () => {
     });
   };
 
+  const categoryOptions = categories?.data?.map((itemName: any, i: number) => ({itemName: itemName.categoryName, itemId: `${i+1}`}))
+  
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [getCategories])
+  
   return (
     <div className="newProduct">
       <div className="newProduct__content">
         <div className="newProduct__content__info">
           <Select
-            options={[
-              { itemId: 0, itemName: "Obraz" },
-              { itemId: 1, itemName: "Druk" },
-              { itemId: 0, itemName: "Obraz" },
-              { itemId: 1, itemName: "Druk" },
-              { itemId: 0, itemName: "Obraz" },
-              { itemId: 1, itemName: "Druk" },
-              { itemId: 0, itemName: "Obraz" },
-              { itemId: 1, itemName: "Druk" },
-            ]}
+            options={categoryOptions}
             onSelect={setCategory}
           />
           <FileBase
@@ -83,12 +85,16 @@ export const NewProduct = () => {
           </div>
         </div>
         <div className="newProduct__content__inputs">
+          <div>
           <Input change={handleTextInput} name="name" label="Nazwa" />
           <Input change={handleTextInput} name="price" label="Cena" />
           <Input change={handleTextInput} name="description" label="Opis" />
+          </div>
+          <div>
           <Input change={handleTextInput} name="quantity" label="Ilość produktu" />
           <Input change={handleTextInput} name="size" label="Rozmiar" />
           <Input change={handleTextInput} name="color" label="Kolor" />
+          </div>
         </div>
       </div>
     </div>

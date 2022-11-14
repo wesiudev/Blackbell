@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type ListItem = { itemId: string; itemName: string }; 
 export interface SelectInputProps {
@@ -19,8 +19,9 @@ const Select = ({
     onSelect({ category: itemName });
   };
 
-  const toggleMenuOpen = (): void => setMenuOpen(!menuOpen); 
-
+  const toggleMenuOpen = (): void => {
+    setMenuOpen(!menuOpen); 
+  }
   return (
     <div className="select">
       <div className="select__chosen" onClick={toggleMenuOpen}>

@@ -1,6 +1,8 @@
 export const AUTH = "AUTH"
+export const LOGOUT = "LOGOUT"
 export const GET_ERROR = "GET_ERROR"
 export const CLEAR_ERRORS = "CLEAR_ERRORS"
 export const FETCH_USER = "FETCH_USER"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const REMOVE_CATEGORY = "REMOVE_CATEGORY"
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES"

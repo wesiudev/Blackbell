@@ -5,7 +5,7 @@ import Menu from './elements/menu';
 
 const AdminTools = () => {
 
-    const { message } = useSelector((state: any) => state.error);
+    const message = useSelector((state: any) => state.error);
 
     const [isCategoryMenuOpened, setCategoryMenuOpened] = useState<boolean>(false);
     
@@ -20,8 +20,12 @@ const AdminTools = () => {
                 <Menu isMenuOpened={isCategoryMenuOpened} menuName='categories'/>
                 <Headline text='Dodaj produkt' isMenuOpened={isNewProductOpened} openMenu={setNewProductOpened}/>
                 <Menu isMenuOpened={isNewProductOpened} menuName='newProduct'/>
-                
             </div>
+            {message.msg !== null && (
+            <div className="admin_panel__error">
+                <div className="admin_panel__error__message">{message.msg}</div>
+            </div>
+             )}
         </div>
     )
 }

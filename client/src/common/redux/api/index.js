@@ -17,8 +17,7 @@ export const signIn = (userInput) => API.post("/api/user/signin", userInput);
 export const signUp = (userInput) => API.post("/api/user/signup", userInput);
 export const signInAdmin = (userInput) =>
   API.post("/api/owner/signin", userInput);
-export const fetchUser = (userInput) =>
-  API.post("/api/user/fetchUser", userInput);
 //menage categories
-export const addCategory = (req) => API.post("/api/owner/category", req);
-export const removeCategory = (req) => API.post("/api/owner/category", req);
+export const addCategory = (req) => API.post("/api/category", req);
+export const removeCategory = (req) => API.post("/api/category", req);
+export const fetchCategories = (req) => API.get("/api/category");

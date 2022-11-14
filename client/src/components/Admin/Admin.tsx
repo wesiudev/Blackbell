@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
+import { LOGOUT } from '../../common/redux/actions/actionTypes';
 import { signInAdmin } from '../../common/redux/actions/owner';
 import AdminTools from '../AdminTools/AdminTools';
-
+import decode from "jwt-decode";
 const Admin = () => {
     const [{userName, password}, setUserInput] = useState<{userName: string, password:string}>({userName:'', password:''});
 
@@ -33,6 +34,18 @@ const Admin = () => {
     const [user, setUser] = useState<any>(
         JSON.parse(localStorage.getItem("profile") as string)
     );
+
+    useEffect(() => {
+        const token = user?.token;
+        if (token) {
+          const decodedToken: object | any = decode(token);
+          if (decodedToken.exp * 1000 + 800100400 < new Date().getTime())
+            dispatch({ type: LOGOUT });
+        }
+        if (!token) {
+            dispatch({ type: LOGOUT });
+        }
+      }, []);
       
     return(
     <>

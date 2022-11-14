@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const secret = process.env.JWT_SECRET || "test";
+const secret = "owner";
 
-const auth = async (req, res, next) => {
+const ownerAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const isCustomAuth = token.length < 500;
@@ -25,4 +25,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth;
+module.exports = ownerAuth;

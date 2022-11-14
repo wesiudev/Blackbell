@@ -18,7 +18,6 @@ router.post("/create", async (req, res) => {
   const product = req.body;
   const newProduct = new Product({
     ...product,
-    createdAt: new Date().toISOString(),
   });
   try {
     await newProduct.save();

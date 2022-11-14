@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Owner = require("../../models/owner");
 const router = express.Router();
-const secret = process.env.JWT_SECRET || "test";
+const secret = process.env.JWT_SECRET || "owner";
 
 router.post("/signin", async (req, res) => {
   try {
@@ -24,7 +24,7 @@ router.post("/signin", async (req, res) => {
       { userName: oldUser.userName, id: oldUser._id },
       secret,
       {
-        expiresIn: "1h",
+        expiresIn: "168h",
       }
     );
 
@@ -33,51 +33,6 @@ router.post("/signin", async (req, res) => {
       token,
       msg: "Logowanie zakończyło się sukcesem.",
     });
-  } catch (error) {
-    res.status(500).json({
-      msg: error.message,
-    });
-  }
-});
-
-router.post("/category", async (req, res) => {
-  try {
-    const { userName, category, actionType } = req.body;
-
-    const user = await Owner.findOne({ userName });
-    let msg;
-
-    const categoryAlreadyExists = user.categories.filter(
-      (oldCategory) => oldCategory === category
-    );
-
-    switch (actionType) {
-      case "ADD":
-        if (categoryAlreadyExists.length > 0) {
-          throw Error(`Kategoria ${category} już istnieje.`);
-        } else {
-          await Owner.updateOne(
-            { _id: user._id },
-            {
-              $push: { categories: `${category}` },
-            }
-          );
-        }
-        break;
-      case "REMOVE":
-        await Owner.updateOne(
-          { _id: user._id },
-          {
-            $pull: { categories: `${category}` },
-          }
-        );
-        msg = "Pomyślnie usunięto kategorię";
-        break;
-      default:
-        break;
-    }
-    const result = await Owner.findById(user._id);
-    res.status(200).json({ result, msg });
   } catch (error) {
     res.status(500).json({
       msg: error.message,
