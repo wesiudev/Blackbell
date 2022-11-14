@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const secret = "owner";
+const secret = process.env.JWT_OWNER_SECRET || "owner";
 
 const ownerAuth = async (req, res, next) => {
   try {

@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Owner = require("../../models/owner");
 const router = express.Router();
-const secret = process.env.JWT_SECRET || "owner";
+const secret = process.env.JWT_OWNER_SECRET || "owner";
 
 router.post("/signin", async (req, res) => {
   try {
