@@ -26,33 +26,28 @@
     justify-content: center;
     padding:50px 0;
     position: relative;
-    &__error{
-        left:0;
-        top:0;
-        position: absolute;
-        height:100vh;
-        width:100%;
+    &__alert{
+        right:50px;
+        top:160px;
+        position: fixed;
+        height:0vh;
+        z-index: 25;
         display:flex;
-        align-items: center;
         justify-content: center;
-        cursor:not-allowed;
+        align-items: center;
         &__message{
-            height:50px;
-            padding:15px 30px;
-            background-color: #f1e5e1;
-            border-radius: 5px;
-            border:1px solid #afadac;
-            display:flex;
-            align-items: center;
-            color:black;
-            position: relative;
+            margin:0 auto;
+            transition:.5s;
+            padding:15px 20px;
+            border-radius: 8px;
+            color:white;
         }
     }
     hr{
         background-color:rgb(53, 53, 53);
         height:1px;
         box-shadow: 0px 0px transparent;
-        width:90%;
+        width:90%; 
     }
     .panel{
         background-color: rgb(207, 231, 245);
@@ -130,10 +125,13 @@
 
 .newProduct{
     width:100%;
+    position:relative;
     &__content{
         display:flex;
         flex-direction: column;
         flex-wrap: wrap;
+        justify-content: center;
+        margin:0 auto;
         &__info{
             display:flex;
             flex-direction: row;
@@ -178,6 +176,7 @@
             display:flex;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: flex-start;
             &__input{
                 display:flex;
                 flex-direction: column;
@@ -185,8 +184,20 @@
             }
         }
     }
+    .buttonAdd{
+        margin:25px 0 0 0;
+        width:150px;
+        padding:5px 5px;
+        background-color: #67c867;
+        border:1px solid rgb(38, 146, 38);
+        border-radius: 5px;
+        color:white;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
 }
-
 .categories{
     width:100%;
     &__content{

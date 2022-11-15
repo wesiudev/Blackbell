@@ -5,14 +5,36 @@ import Menu from './elements/menu';
 
 const AdminTools = () => {
 
-    const message = useSelector((state: any) => state.error);
+    const message = useSelector((state: any) => state.messages);
 
     const [isCategoryMenuOpened, setCategoryMenuOpened] = useState<boolean>(false);
     
     const [isNewProductOpened, setNewProductOpened] = useState<boolean>(false);
 
+    function setMessageStyles(){
+        if (message.id === "ERROR") {
+            return "#e76c6c"
+        }else if (message.id === "SUCCESS") {
+            return "#67c867"
+        }
+    }
+
+    const messageStyles = {
+        backgroundColor: setMessageStyles()
+    }
+
     return(
         <div className="admin_panel">
+            {message.text ? (
+                <div className="admin_panel__alert">
+                    <div style={messageStyles} className="admin_panel__alert__message">
+                        {message.text}
+                    </div>
+                </div>
+            ) : (
+                null
+            )}
+            
             <div className="panel">
                 <Headline text='Panel administracyjny' isMenuOpened={null} openMenu={null} />
                 <hr />
@@ -21,11 +43,7 @@ const AdminTools = () => {
                 <Headline text='Dodaj produkt' isMenuOpened={isNewProductOpened} openMenu={setNewProductOpened}/>
                 <Menu isMenuOpened={isNewProductOpened} menuName='newProduct'/>
             </div>
-            {message.msg !== null && (
-            <div className="admin_panel__error">
-                <div className="admin_panel__error__message">{message.msg}</div>
-            </div>
-             )}
+            
         </div>
     )
 }

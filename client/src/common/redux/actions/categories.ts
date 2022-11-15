@@ -1,6 +1,6 @@
-import { ADD_CATEGORY, GET_ERROR, REMOVE_CATEGORY, FETCH_CATEGORIES } from "./actionTypes";
+import { ADD_CATEGORY, GET_MESSAGES, REMOVE_CATEGORY, FETCH_CATEGORIES } from "./actionTypes";
 import * as api from "../api";
-import { clearErrors, getErrors } from "./error";
+import { clearMessages, getMessages } from "./messages";
 
 type CategoryAction = {
     category: string
@@ -13,10 +13,14 @@ type CategoryAction = {
       try {
         const { data } = await api.addCategory(req);
         dispatch({ type: ADD_CATEGORY, data });
-      } catch (error: any) {
-        dispatch(getErrors(error.response.data.msg, GET_ERROR));
+        dispatch(getMessages(data.msg.text, data.msg.id));
         setTimeout(() => {
-          dispatch(clearErrors());
+          dispatch(clearMessages());
+        }, 5000);
+      } catch (error: any) {
+        dispatch(getMessages(error.response.data.msg, "ERROR"));
+        setTimeout(() => {
+          dispatch(clearMessages());
         }, 5000);
       }
     };
@@ -27,10 +31,14 @@ type CategoryAction = {
       try {
         const { data } = await api.removeCategory(req);
         dispatch({ type: REMOVE_CATEGORY, data });
-      } catch (error: any) {
-        dispatch(getErrors(error.response.data.msg, GET_ERROR));
+        dispatch(getMessages(data.msg.text, data.msg.id));
         setTimeout(() => {
-          dispatch(clearErrors());
+          dispatch(clearMessages());
+        }, 5000);
+      } catch (error: any) {
+        dispatch(getMessages(error.response.data.msg, "ERROR"));
+        setTimeout(() => {
+          dispatch(clearMessages());
         }, 5000);
       }
     };
@@ -42,9 +50,9 @@ type CategoryAction = {
         const { data } = await api.fetchCategories();
         dispatch({ type: FETCH_CATEGORIES, data });
       } catch (error: any) {
-        dispatch(getErrors(error.response.data.msg, GET_ERROR));
+        dispatch(getMessages(error.response.data.msg, "ERROR"));
         setTimeout(() => {
-          dispatch(clearErrors());
+          dispatch(clearMessages());
         }, 5000);
       }
     };

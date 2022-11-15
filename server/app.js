@@ -4,7 +4,6 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
-const productRoutes = require("./routes/api/product.js");
 const userRoutes = require("./routes/api/user.js");
 const ownerRoutes = require("./routes/api/owner.js");
 const categoryRoutes = require("./routes/api/category.js");
@@ -19,7 +18,6 @@ dotenv.config();
 
 const db = process.env.MONGO_URI;
 
-app.use("/api/products", productRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/owner", ownerRoutes);
 app.use("/api/category", categoryRoutes);

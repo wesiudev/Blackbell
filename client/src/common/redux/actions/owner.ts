@@ -1,6 +1,6 @@
-import { AUTH, GET_ERROR } from "./actionTypes";
+import { AUTH, GET_MESSAGES } from "./actionTypes";
 import * as api from "../api";
-import { clearErrors, getErrors } from "./error";
+import { clearMessages, getMessages } from "./messages";
 
 interface UserInput {
   userName:string
@@ -14,9 +14,9 @@ export const signInAdmin =
       const { data } = await api.signInAdmin(userInput);
       dispatch({ type: AUTH, data });
     } catch (error: any) {
-      dispatch(getErrors(error.response.data.msg, GET_ERROR));
+      dispatch(getMessages(error.response.data.msg, GET_MESSAGES));
       setTimeout(() => {
-        dispatch(clearErrors());
+        dispatch(clearMessages());
       }, 5000);
     }
   };

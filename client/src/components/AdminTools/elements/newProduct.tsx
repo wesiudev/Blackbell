@@ -4,50 +4,49 @@ import Input from "./input";
 import Select from "./select/select";
 import { getCategories } from '../../../common/redux/actions/categories'
 import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../../../common/redux/actions/product";
 
 
 type Product = {
-  name: string | undefined;
-  price: string | undefined;
-  description: string | undefined;
-  quantity: number | null;
-  size: string | undefined;
-  color: string | undefined;
+  itemName: string | undefined;
+  itemPrice: number | null;
+  itemDescription: string | undefined;
+  itemQuantity: number | null;
+  itemSize: string | undefined;
+  itemColor: string | undefined;
 };
+
+type imageObject = {
+  imageSrc: string
+}
 
 export const NewProduct = () => {
   const dispatch: any = useDispatch()
-  const images: string[] = [];
+  const itemImages: imageObject[] = [];
   const [imageNames, setImageNames] = useState<any[]>([]);
   const [category, setCategory] = useState<string>('');
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile") as string));
   const { categories } = useSelector((state: any) => state.categories);
   const [
-    { name, price, description, quantity, size, color },
+    { itemName, itemPrice, itemDescription, itemQuantity, itemSize, itemColor },
     setProductData,
   ] = useState<Product>({
-    name: "",
-    price: "",
-    description: "",
-    quantity: 0,
-    size: "",
-    color: "",
+    itemName: "",
+    itemPrice: 0,
+    itemDescription: "",
+    itemQuantity: 0,
+    itemSize: "",
+    itemColor: "",
   });
 
   function addImageToUserInput(base64: any) {
-    images.push(base64.base64);
+    itemImages.push(base64.base64);
     setImageNames(imageNames => [...imageNames, {name: base64.name}]);
-    console.log(imageNames)
   }
 
   const handleTextInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setProductData({
-      name,
-      price,
-      description,
-      quantity,
-      size,
-      color,
+      itemName, itemPrice, itemDescription, itemQuantity, itemSize, itemColor,
       [e.target.name]: e.target.value,
     });
   };
@@ -58,6 +57,20 @@ export const NewProduct = () => {
     dispatch(getCategories())
   }, [getCategories])
   
+  function createProduct() {
+    const req = {
+      category,
+      itemName,
+      itemPrice,
+      itemDescription,
+      itemQuantity,
+      itemSize,
+      itemColor,
+      itemImages,
+    }
+    dispatch(addProduct(req));
+  }
+
   return (
     <div className="newProduct">
       <div className="newProduct__content">
@@ -85,15 +98,14 @@ export const NewProduct = () => {
           </div>
         </div>
         <div className="newProduct__content__inputs">
-          <div>
-          <Input change={handleTextInput} name="name" label="Nazwa" />
-          <Input change={handleTextInput} name="price" label="Cena" />
-          <Input change={handleTextInput} name="description" label="Opis" />
-          </div>
-          <div>
-          <Input change={handleTextInput} name="quantity" label="Ilość produktu" />
-          <Input change={handleTextInput} name="size" label="Rozmiar" />
-          <Input change={handleTextInput} name="color" label="Kolor" />
+          <Input change={handleTextInput} name="itemName" label="Nazwa" />
+          <Input change={handleTextInput} name="itemPrice" label="Cena" />
+          <Input change={handleTextInput} name="itemDescription" label="Opis" />
+          <Input change={handleTextInput} name="itemQuantity" label="Ilość produktu" />
+          <Input change={handleTextInput} name="itemSize" label="Rozmiar" />
+          <Input change={handleTextInput} name="itemColor" label="Kolor" />
+          <div className="newProduct__content__inputs__input">
+            <div className="buttonAdd" onClick={createProduct}>Dodaj produkt</div>
           </div>
         </div>
       </div>

@@ -38,7 +38,6 @@ export const MenageCategories = () => {
     useEffect(() => {
           setCategoryList(categories.data)
       }, [categories])
-      console.log(categoryList)
     return(
         <div className="categories">
             <div className="categories__content">

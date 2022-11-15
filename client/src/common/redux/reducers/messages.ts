@@ -1,19 +1,20 @@
-import { GET_ERROR, CLEAR_ERRORS } from "../actions/actionTypes";
+import { GET_MESSAGES, CLEAR_MESSAGES } from "../actions/actionTypes";
 
 const errorReducer = (
-  state = { msg: null, id: null },
+  state = { text: null, id: null },
   action: { type: string; data: any }
 ) => {
   switch (action.type) {
-    case GET_ERROR:
+    case GET_MESSAGES:
       return {
         ...state,
-        msg: action.data.msg,
+        text: action.data.text,
         id: action.data.id,
       };
-    case CLEAR_ERRORS:
+    case CLEAR_MESSAGES:
       return {
-        msg: null,
+        ...state,
+        text: null,
         id: null,
       };
     default:
