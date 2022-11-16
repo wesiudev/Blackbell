@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import Input from "./input";
-import Select from "./select/select";
-import { getCategories } from '../../../common/redux/actions/categories'
+import Input from "../input";
+import Select from "../select/select";
+import { getCategories } from '../../../../common/redux/actions/categories'
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../../common/redux/actions/product";
+import { addProduct } from "../../../../common/redux/actions/product";
 
 
 type Product = {

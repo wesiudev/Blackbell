@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Headline from './elements/headline';
-import Menu from './elements/menu';
+import Menu from './elements/menu/menu';
 
 const AdminTools = () => {
 

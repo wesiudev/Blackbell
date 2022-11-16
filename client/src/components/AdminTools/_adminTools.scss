@@ -294,18 +294,19 @@
                 flex-wrap: wrap;
                 width:100%;
                 display:flex;
-                flex-direction: row;
-                margin: 10px 5px;
+                flex-direction: column;
+
+                margin:0 25px;
                 &__content{
                     display:flex;
-                    flex-direction: column;
-                    margin:0 25px;
+                    flex-direction: row;
                     h3{
                         color:rgb(32, 32, 32);
                     }
                     &__item{
                         height:20px;
                         padding:5px 8px;
+                        margin:5px 8px;
                         background-color: rgb(187, 226, 248);
                         border:1px solid rgb(129, 202, 245);
                         border-radius: 5px;

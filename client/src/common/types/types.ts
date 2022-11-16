@@ -5,10 +5,10 @@ export interface IProduct {
     itemQuantity: number | null;
     itemSize: string | undefined;
     itemColor: string | undefined;
-    itemImages: Image
+    itemImages: Image[] | any
   };
 
-  type Image = {
+  export type Image = {
     imageSrc: string,
   }
   export interface ICategory {

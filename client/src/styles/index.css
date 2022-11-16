@@ -1234,13 +1234,12 @@ header .content .open span {
   flex-wrap: wrap;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  margin: 10px 5px;
+  flex-direction: column;
+  margin: 0 25px;
 }
 .products__content .category__items__content {
   display: flex;
-  flex-direction: column;
-  margin: 0 25px;
+  flex-direction: row;
 }
 .products__content .category__items__content h3 {
   color: rgb(32, 32, 32);
@@ -1248,6 +1247,7 @@ header .content .open span {
 .products__content .category__items__content__item {
   height: 20px;
   padding: 5px 8px;
+  margin: 5px 8px;
   background-color: rgb(187, 226, 248);
   border: 1px solid rgb(129, 202, 245);
   border-radius: 5px;
@@ -1300,6 +1300,73 @@ header .content .open span {
     box-shadow: 2px 2px 8px black;
   }
 }
+.shop {
+  min-height: 100vh;
+  width: 70%;
+  margin: 95px auto 0px auto;
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  .shop {
+    width: 90vw;
+  }
+}
+@media screen and (min-width: 766px) and (max-width: 1023px) {
+  .shop {
+    width: 95vw;
+  }
+}
+@media screen and (max-width: 765px) {
+  .shop {
+    width: 100%;
+  }
+}
+.shop__search {
+  width: 20%;
+  min-height: 100vh;
+  border-right: 1px solid rgb(180, 180, 180);
+}
+@media screen and (min-width: 1024px) and (max-width: 1600px) {
+  .shop__search {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .shop__search {
+    display: none;
+  }
+}
+.shop__search__categories {
+  margin: 70px 0;
+  border-bottom: 1px solid rgb(180, 180, 180);
+}
+.shop__search__list__item h2 span {
+  color: rgb(56, 56, 56);
+}
+.shop__feed {
+  padding: 50px;
+  width: 100%;
+}
+.shop__feed .category {
+  width: 100%;
+}
+.shop__feed .category__title {
+  padding-left: 15px;
+  width: 100%;
+  color: white;
+  background-color: black;
+}
+.shop__feed .category__items {
+  display: flex;
+  flex-direction: column;
+}
+.shop__feed .category__items__item {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .select {
   width: 225px;
   height: 50px;

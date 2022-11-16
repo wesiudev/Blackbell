@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { addCategory, getCategories, removeCategory } from "../../../common/redux/actions/categories";
+import { addCategory, getCategories, removeCategory } from "../../../../common/redux/actions/categories";
 import { useDispatch, useSelector } from "react-redux";
 
 export const MenageCategories = () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../../common/redux/actions/categories";
-import { ICategory, IProduct } from "../../../common/types/types";
+import { getCategories } from "../../../../common/redux/actions/categories";
+import { ICategory, IProduct } from "../../../../common/types/types";
 
 
 const MenageProducts = () => {
@@ -21,8 +21,8 @@ const MenageProducts = () => {
                             <hr />
                         </div>
                         <div className="category__items">
+                            <h3>Przedmioty:</h3>
                             <div className="category__items__content">
-                                <h3>Przedmioty:</h3>
                                 {category?.categoryItems.map((item:IProduct, idx:number) => (
                                     <div key={idx} className="category__items__content__item">
                                         {item.itemName}
