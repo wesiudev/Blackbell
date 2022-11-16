@@ -22,7 +22,7 @@ export const signInAdmin = (userInput) =>
 //categories
 export const addCategory = (req) => API.post("/api/category", req);
 export const removeCategory = (req) => API.post("/api/category", req);
-export const fetchCategories = (req) => API.get("/api/category");
+export const fetchCategories = () => API.get("/api/category");
 //products
 export const addProduct = (req) => API.post("/api/category/createProduct", req);
 export const deleteProduct = (req) =>

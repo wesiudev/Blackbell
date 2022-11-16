@@ -1,5 +1,6 @@
 import { NewProduct } from './newProduct' 
 import { MenageCategories } from './categories'
+import MenageProducts from './products'
 type MenuProps = {
     isMenuOpened: boolean
     menuName: string
@@ -20,6 +21,13 @@ const Menu = (props: MenuProps) => {
                 {props.menuName === 'categories' ? (
                     <>
                         <MenageCategories/>
+                    </>
+                ) : (
+                    null
+                )}
+                {props.menuName === 'menageProducts' ? (
+                    <>
+                        <MenageProducts/>
                     </>
                 ) : (
                     null

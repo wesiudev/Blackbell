@@ -1,7 +1,10 @@
 import {
   ADD_CATEGORY,
+  CREATE_PRODUCT,
   FETCH_CATEGORIES,
+  FETCH_PRODUCTS,
   REMOVE_CATEGORY,
+  REMOVE_PRODUCT,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -27,6 +30,8 @@ const categoryReducer = (state = initialState, action) => {
         categories: action.data,
       };
     case FETCH_CATEGORIES:
+    case CREATE_PRODUCT:
+    case REMOVE_PRODUCT:
       return {
         ...state,
         categories: action.data,

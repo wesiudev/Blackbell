@@ -25,7 +25,6 @@ export const NewProduct = () => {
   const itemImages: imageObject[] = [];
   const [imageNames, setImageNames] = useState<any[]>([]);
   const [category, setCategory] = useState<string>('');
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile") as string));
   const { categories } = useSelector((state: any) => state.categories);
   const [
     { itemName, itemPrice, itemDescription, itemQuantity, itemSize, itemColor },
@@ -55,7 +54,7 @@ export const NewProduct = () => {
   
   useEffect(() => {
     dispatch(getCategories())
-  }, [getCategories])
+  }, [])
   
   function createProduct() {
     const req = {
@@ -69,6 +68,7 @@ export const NewProduct = () => {
       itemImages,
     }
     dispatch(addProduct(req));
+    dispatch(getCategories())
   }
 
   return (

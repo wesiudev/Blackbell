@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const MenageCategories = () => {
     const dispatch = useDispatch<any>();
-    const { categories } = useSelector((state: any) => state.categories);
-    const [categoryList, setCategoryList] = useState<any[]>(categories.data);
+    const {categories} = useSelector((state: any) => state.categories);
     const [userInput, setUserInput] = useState<string>('');
     const [currentlyEditingCategory, setCurrentlyEditingCategory] = useState<string>('');
     const [deleteCategoryIncurance, setDeleteCategoryIncurance] = useState<boolean>(false);
@@ -36,8 +35,8 @@ export const MenageCategories = () => {
     }
 
     useEffect(() => {
-          setCategoryList(categories.data)
-      }, [categories])
+        dispatch(getCategories())
+    }, [])
     return(
         <div className="categories">
             <div className="categories__content">
@@ -76,7 +75,7 @@ export const MenageCategories = () => {
                     </div>
                 </div>
                 <div className="categories__content__list">
-                    {categories && categoryList?.map((category: any, idx: number) => (
+                    {categories?.data?.map((category: any, idx: number) => (
                         <div className="categories__content__list__item" key={idx} onClick={() => setCurrentlyEditingCategory(category.categoryName)}>{category.categoryName === '' ? '?' : category.categoryName}</div>
                     ))}
                 </div>

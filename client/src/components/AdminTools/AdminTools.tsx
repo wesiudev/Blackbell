@@ -10,6 +10,8 @@ const AdminTools = () => {
     const [isCategoryMenuOpened, setCategoryMenuOpened] = useState<boolean>(false);
     
     const [isNewProductOpened, setNewProductOpened] = useState<boolean>(false);
+    
+    const [isManageProductsOpened, setManageProductsOpened] = useState<boolean>(false);
 
     function setMessageStyles(){
         if (message.id === "ERROR") {
@@ -42,6 +44,8 @@ const AdminTools = () => {
                 <Menu isMenuOpened={isCategoryMenuOpened} menuName='categories'/>
                 <Headline text='Dodaj produkt' isMenuOpened={isNewProductOpened} openMenu={setNewProductOpened}/>
                 <Menu isMenuOpened={isNewProductOpened} menuName='newProduct'/>
+                <Headline text='Zarządzaj produktami' isMenuOpened={isManageProductsOpened} openMenu={setManageProductsOpened}/>
+                <Menu isMenuOpened={isManageProductsOpened} menuName='menageProducts'/>
             </div>
             
         </div>
