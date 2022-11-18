@@ -1,0 +1,32 @@
+.editor{
+    position:fixed;
+    left:0;
+    top:0;
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    &__content{
+        width:500px;
+        min-height: 500px;
+        box-shadow: 3px 3px 9px black;
+        background-color: white;
+        .feed{
+            width:95%;
+            margin:0 auto;
+            button{
+                border:none;
+                padding:5px 15px;
+                background-color: rgb(103, 200, 103);
+                border:1px solid rgb(38, 146, 38);
+                border-radius: 5px;
+                color:white;
+            }
+            hr{
+                width:100%;
+            }
+        }
+    }
+}

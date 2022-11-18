@@ -18,11 +18,13 @@ type Product = {
 
 type imageObject = {
   imageSrc: string
+  imageName: string
+  imageIndex: string
 }
 
 export const NewProduct = () => {
   const dispatch: any = useDispatch()
-  const itemImages: imageObject[] = [];
+  const [itemImages, setImageItems] = useState<imageObject[]>([]);
   const [imageNames, setImageNames] = useState<any[]>([]);
   const [category, setCategory] = useState<string>('');
   const { categories } = useSelector((state: any) => state.categories);
@@ -39,7 +41,12 @@ export const NewProduct = () => {
   });
 
   function addImageToUserInput(base64: any) {
-    itemImages.push(base64.base64);
+    const itemToPush = {
+      imageSrc: base64.base64,
+      imageName: base64.name,
+      imageIndex: `${itemImages.length+1}`
+    }
+    setImageItems(itemImages => [...itemImages, itemToPush]);
     setImageNames(imageNames => [...imageNames, {name: base64.name}]);
   }
 
@@ -70,7 +77,6 @@ export const NewProduct = () => {
     dispatch(addProduct(req));
     dispatch(getCategories())
   }
-
   return (
     <div className="newProduct">
       <div className="newProduct__content">

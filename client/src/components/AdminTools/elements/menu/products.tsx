@@ -1,40 +1,39 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../../../common/redux/actions/categories";
-import { ICategory, IProduct } from "../../../../common/types/types";
 
+import { ICategory, IProduct, MenuProps } from "../../../../common/types/types";
 
-const MenageProducts = () => {
-    const dispatch: any = useDispatch()
+const MenageProducts = ({categories, subCategories, products}: MenuProps) => {
 
-    const { categories } = useSelector((state: any) => state.categories);
-    useEffect(() => {
-        dispatch(getCategories())
-      }, [])
-    return(
-        <div className="products">
-            <div className="products__content">
-                {categories?.data?.map((category: ICategory, idx: number) => (
-                    <div key={idx} className="category">
-                        <div className="category__title">
-                            <h1>{category.categoryName}</h1>
-                            <hr />
-                        </div>
-                        <div className="category__items">
-                            <h3>Przedmioty:</h3>
-                            <div className="category__items__content">
-                                {category?.categoryItems.map((item:IProduct, idx:number) => (
-                                    <div key={idx} className="category__items__content__item">
-                                        {item.itemName}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+  const array = categories?.map((category: ICategory) => ({
+    category: category.categoryName,
+    products: products?.filter(
+      (product: IProduct) => product.itemCategoryName === category.categoryName
+    ),
+  }));
+
+  return (
+    <div className="products">
+      {array?.map((item: any) => (
+        <div className="products__row">
+          <h2>Wszystkie produkty z kategorii {item.category}</h2>
+          <div className="products__row__items">
+            {item?.products?.map((product: IProduct) => (
+              <div className="products__row__items__item">
+                {product.itemName}
+                {product?.itemImages?.map((image: any) => (
+                  <img
+                    style={{ maxWidth: "250px" }}
+                    src={image.imageSrc}
+                    alt="no img"
+                  />
                 ))}
-            </div>
+              </div>
+            ))}
+          </div>
+          <h3>Podkategorie</h3>
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default MenageProducts
+export default MenageProducts;

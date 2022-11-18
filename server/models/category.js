@@ -2,19 +2,9 @@ const mongoose = require("mongoose");
 
 const categorySchema = mongoose.Schema({
   categoryName: String,
-  categoryItems: [
+  subCategories: [
     {
-      itemName: String,
-      itemPrice: Number,
-      itemDescription: String,
-      itemQuantity: Number,
-      itemSize: String,
-      itemColor: String,
-      itemImages: [
-        {
-          imageSrc: String,
-        },
-      ],
+      subCategoryName: String,
     },
   ],
 });

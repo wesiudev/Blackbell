@@ -25,17 +25,15 @@
         }
         &__categories{
             margin:70px 0;
-            border-bottom: 1px solid rgb(180, 180, 180);
+            border-bottom: 1px solid #b4b4b4;
         }
         &__list{
             &__item{
-                h2{
-                    span{
-                        color: rgb(56, 56, 56);
-                    }
-                }
             }
         }
+    }
+    .greyish{
+        color: #383838;
     }
     &__feed{
         padding:50px;

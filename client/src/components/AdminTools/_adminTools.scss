@@ -18,14 +18,15 @@
     margin-top:95px;
     width:100%;
     min-height:100vh;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+    // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	// background-size: 400% 400%;
+	// animation: gradient 15s ease infinite;
     display:flex;
     align-items: center;
     justify-content: center;
     padding:50px 0;
     position: relative;
+    color:rgb(32, 32, 32);
     &__alert{
         right:50px;
         top:160px;
@@ -206,6 +207,7 @@
         display:flex;
         flex-direction: column;
         width:100%;
+        margin-bottom: 25px;
         &__menu{
             position:absolute;
             left:0;
@@ -245,25 +247,66 @@
         }
         &__list{
             flex-wrap: wrap;
-            width:100%;
+            width:95%;
             display:flex;
             flex-direction: row;
-            margin: 10px 5px;
+            margin: 25px auto 0 auto;
+            background-color: rgb(187, 226, 248);
+            border:1px solid rgb(129, 202, 245);
+            border-radius: 5px;
             &__item{
-                height:20px;
-                margin:3px 5px;
-                padding:5px 8px;
-                background-color: rgb(187, 226, 248);
-                border:1px solid rgb(129, 202, 245);
-                border-radius: 5px;
-                display:flex;
-                align-items: center;
+                width:95%;
+                margin: 0 auto;
+                &__products{
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    padding-bottom:25px;
+                    &__product{
+                        width:200px;
+                        background-color: white;
+                        text-align: center;
+                        box-shadow: 2px 2px 6px black;
+                        margin: 25px 25px 0 0;
+                        position: relative;
+                        .image{
+                            width:100%;
+                            display:flex;
+                            justify-content: center;
+                            img{
+                                margin-top:35px;
+                                width:75%;
+                                box-shadow: 2px 2px 6px black;
+                                transition: .5s;
+                            }
+                        }
+                        .menageProduct{
+                            position: absolute;
+                            left:3px;
+                            top:3px;
+                            height:25px;
+                            width:25px;
+                            img{
+                                height:100%;
+                                opacity:0.75;
+                                transition: .5s;
+                                &:hover{
+                                    transform: rotate(95deg);
+                                    transition: .5s;
+                                    opacity:1;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         &__new{
             display:flex;
             flex-direction: column;
-            margin:10px;
+            width:95%;
+            margin: 25px auto 0 auto;
             &__row{
                 button{
                     padding:6px 12px;
@@ -283,50 +326,6 @@
 
 .products{
     width:100%;
-    &__content{
-        position: relative;
-        display:flex;
-        flex-direction: column;
-        width:100%;
-        .category{
-            width:100%;
-            &__items{
-                flex-wrap: wrap;
-                width:100%;
-                display:flex;
-                flex-direction: column;
-
-                margin:0 25px;
-                &__content{
-                    display:flex;
-                    flex-direction: row;
-                    h3{
-                        color:rgb(32, 32, 32);
-                    }
-                    &__item{
-                        height:20px;
-                        padding:5px 8px;
-                        margin:5px 8px;
-                        background-color: rgb(187, 226, 248);
-                        border:1px solid rgb(129, 202, 245);
-                        border-radius: 5px;
-                        display:flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                }
-            }
-            &__title{
-                margin:0 25px;
-                hr{
-                    width:100%;
-                }
-                h1{
-                    color:rgb(32, 32, 32);
-                }
-            }
-        }
-    }
 }
 
 @keyframes gradient {

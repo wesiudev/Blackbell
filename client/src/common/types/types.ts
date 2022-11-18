@@ -6,12 +6,26 @@ export interface IProduct {
     itemSize: string | undefined;
     itemColor: string | undefined;
     itemImages: Image[] | any
+    itemCategoryName: string
+    subCategory: string
   };
 
   export type Image = {
     imageSrc: string,
+    imageName: string,
+    imageIndex: string
+  }
+  export interface ISubCategory {
+    subCategoryName: string
+    relatedCategoryName: string
   }
   export interface ICategory {
     categoryName: string
-    categoryItems: IProduct[]
+    subCategories: ISubCategory[]
+  }
+
+  export type MenuProps = {
+    categories: ICategory[]
+    products: IProduct[]
+    subCategories: ISubCategory[]
   }

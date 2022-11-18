@@ -932,15 +932,12 @@ header .content .open span {
   margin-top: 95px;
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-          animation: gradient 15s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 50px 0;
   position: relative;
+  color: rgb(32, 32, 32);
 }
 .admin_panel__alert {
   right: 50px;
@@ -1146,6 +1143,7 @@ header .content .open span {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 25px;
 }
 .categories__content__menu {
   position: absolute;
@@ -1186,25 +1184,66 @@ header .content .open span {
 }
 .categories__content__list {
   flex-wrap: wrap;
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: row;
-  margin: 10px 5px;
-}
-.categories__content__list__item {
-  height: 20px;
-  margin: 3px 5px;
-  padding: 5px 8px;
+  margin: 25px auto 0 auto;
   background-color: rgb(187, 226, 248);
   border: 1px solid rgb(129, 202, 245);
   border-radius: 5px;
+}
+.categories__content__list__item {
+  width: 95%;
+  margin: 0 auto;
+}
+.categories__content__list__item__products {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-bottom: 25px;
+}
+.categories__content__list__item__products__product {
+  width: 200px;
+  background-color: white;
+  text-align: center;
+  box-shadow: 2px 2px 6px black;
+  margin: 25px 25px 0 0;
+  position: relative;
+}
+.categories__content__list__item__products__product .image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.categories__content__list__item__products__product .image img {
+  margin-top: 35px;
+  width: 75%;
+  box-shadow: 2px 2px 6px black;
+  transition: 0.5s;
+}
+.categories__content__list__item__products__product .menageProduct {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 25px;
+  width: 25px;
+}
+.categories__content__list__item__products__product .menageProduct img {
+  height: 100%;
+  opacity: 0.75;
+  transition: 0.5s;
+}
+.categories__content__list__item__products__product .menageProduct img:hover {
+  transform: rotate(95deg);
+  transition: 0.5s;
+  opacity: 1;
 }
 .categories__content__new {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  width: 95%;
+  margin: 25px auto 0 auto;
 }
 .categories__content__new__row button {
   padding: 6px 12px;
@@ -1220,49 +1259,6 @@ header .content .open span {
 
 .products {
   width: 100%;
-}
-.products__content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.products__content .category {
-  width: 100%;
-}
-.products__content .category__items {
-  flex-wrap: wrap;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 25px;
-}
-.products__content .category__items__content {
-  display: flex;
-  flex-direction: row;
-}
-.products__content .category__items__content h3 {
-  color: rgb(32, 32, 32);
-}
-.products__content .category__items__content__item {
-  height: 20px;
-  padding: 5px 8px;
-  margin: 5px 8px;
-  background-color: rgb(187, 226, 248);
-  border: 1px solid rgb(129, 202, 245);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.products__content .category__title {
-  margin: 0 25px;
-}
-.products__content .category__title hr {
-  width: 100%;
-}
-.products__content .category__title h1 {
-  color: rgb(32, 32, 32);
 }
 
 @keyframes gradient {
@@ -1339,10 +1335,10 @@ header .content .open span {
 }
 .shop__search__categories {
   margin: 70px 0;
-  border-bottom: 1px solid rgb(180, 180, 180);
+  border-bottom: 1px solid #b4b4b4;
 }
-.shop__search__list__item h2 span {
-  color: rgb(56, 56, 56);
+.shop .greyish {
+  color: #383838;
 }
 .shop__feed {
   padding: 50px;
@@ -1460,6 +1456,39 @@ header .content .open span {
   top: 8px;
   left: 5px;
   transform: rotate(120deg);
+}
+
+.editor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.editor__content {
+  width: 500px;
+  min-height: 500px;
+  box-shadow: 3px 3px 9px black;
+  background-color: white;
+}
+.editor__content .feed {
+  width: 95%;
+  margin: 0 auto;
+}
+.editor__content .feed button {
+  border: none;
+  padding: 5px 15px;
+  background-color: rgb(103, 200, 103);
+  border: 1px solid rgb(38, 146, 38);
+  border-radius: 5px;
+  color: white;
+}
+.editor__content .feed hr {
+  width: 100%;
 }
 
 body, html {
