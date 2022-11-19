@@ -3,6 +3,8 @@ const Product = require("../../models/product");
 const Category = require("../../models/category");
 const router = express.Router();
 const ownerAuth = require("../../middleware/ownerAuth.js");
+const { findByIdAndUpdate } = require("../../models/product");
+const SubCategory = require("../../models/subCategory");
 
 router.post("/createProduct", async (req, res) => {
   try {
@@ -109,20 +111,118 @@ router.post("/moveProduct", async (req, res) => {
 
 router.post("/editProduct", async (req, res) => {
   try {
-    const { productId, userInput, attributeToChange } = req.body;
-    const itemToEdit = await Product.findOne({ productId });
+    const { productId, userInput, actionType } = req.body;
+    const itemToEdit = await Product.findById(productId);
     if (itemToEdit === null) throw Error(`Produkt ${productId} nie istnieje.`);
-    await Product.updateOne(
-      { _id: itemToEdit._id },
-      { $set: { attributeToChange: userInput } }
-    );
-    const product = await Product.find({ productId });
+
+    let updatedProduct;
+
+    if (actionType === "itemName") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemName: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemPrice") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemPrice: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemQuantity") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemQuantity: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemDescription") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemDescription: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemSize") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemSize: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemColor") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemColor: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemImages") {
+    }
+    if (actionType === "itemCategoryName") {
+      const targettedCategory = await Category.findOne({
+        categoryName: userInput,
+      });
+      if (!targettedCategory) throw Error("Taka kategoria nie istnieje.");
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { itemCategoryName: userInput },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "subCategory") {
+      const subCategoryToAddItemTo = await SubCategory.findOne({
+        subCategoryName: userInput,
+      });
+      if (!subCategoryToAddItemTo)
+        throw Error(`Dodaj podkategorię przed dodaniem do niej produktu.`);
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $set: { subCategory: userInput },
+        },
+        { new: true }
+      );
+    }
+    console.log(updatedProduct);
     res.status(200).json({
       msg: {
         id: "SUCCESS",
         text: `Pomyślnie edytowano produkt.`,
       },
-      data: product,
+      updatedProduct,
     });
   } catch (error) {
     res.status(500).json({
@@ -131,6 +231,18 @@ router.post("/editProduct", async (req, res) => {
   }
 });
 
+router.post("/fetchProduct", async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const product = await Product.findOne({ _id: productId });
+    console.log(productId);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({
+      msg: error.message,
+    });
+  }
+});
 router.get("/fetchProducts", async (req, res) => {
   try {
     const products = await Product.find({});
@@ -139,20 +251,6 @@ router.get("/fetchProducts", async (req, res) => {
     res.status(500).json({
       msg: error.message,
     });
-  }
-});
-router.post("/fetchProduct", async (req, res) => {
-  try {
-    const { itemId } = req.body;
-
-    const product = await Product.findOne({ _id: itemId });
-    console.log(product.itemName);
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({
-      msg: error.message,
-    });
-    console.log(error);
   }
 });
 

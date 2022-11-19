@@ -127,24 +127,20 @@ export const MenageCategories = ({
           <div className="categories__content__list">
             <div className="categories__content__list__item">
               <h1>{item.category}</h1>
-              <h2>Wszystkie przedmioty</h2>
               <div className="categories__content__list__item__products">
                 {item?.products?.map((product: IProduct, idx: number) => (
-                  <div className="categories__content__list__item__products__product">
-                    <div
-                      onClick={() => editProduct(product)}
-                      className="menageProduct"
-                    >
-                      <img src={gear} alt="" />
-                    </div>
+                  <div onClick={() => editProduct(product)} className="categories__content__list__item__products__product">
                     {product.itemImages.map((image: Image) => (
                       <div className="image">
                         {image.imageIndex === "1" ? (
+                          <div>
                           <img src={image.imageSrc} alt="" />
+                          
+                          </div>
                         ) : null}
                       </div>
                     ))}
-                    <h3>{product.itemName}</h3>
+                    <span>{product.itemName}</span>
                   </div>
                 ))}
               </div>

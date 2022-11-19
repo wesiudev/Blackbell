@@ -8,6 +8,7 @@ export interface IProduct {
     itemImages: Image[] | any
     itemCategoryName: string
     subCategory: string
+    _id: string
   };
 
   export type Image = {

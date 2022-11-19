@@ -35,5 +35,3 @@ export const fetchProducts = (req) =>
   API.get("/api/product/fetchProducts", req);
 export const fetchProduct = (req) => API.post("/api/product/fetchProduct", req);
 export const editProduct = (req) => API.post("/api/product/editProduct", req);
-export const removeProduct = (req) =>
-  API.post("/api/product/removeProduct", req);

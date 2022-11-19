@@ -18,15 +18,15 @@
     margin-top:95px;
     width:100%;
     min-height:100vh;
-    // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	// background-size: 400% 400%;
-	// animation: gradient 15s ease infinite;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
     display:flex;
     align-items: center;
     justify-content: center;
     padding:50px 0;
     position: relative;
-    color:rgb(32, 32, 32);
+
     &__alert{
         right:50px;
         top:160px;
@@ -44,21 +44,20 @@
             color:white;
         }
     }
-    hr{
+    .hr{
         background-color:rgb(53, 53, 53);
         height:1px;
-        box-shadow: 0px 0px transparent;
         width:90%; 
+        margin:0 auto;
     }
     .panel{
-        background-color: rgb(207, 231, 245);
+        background-color: rgb(88, 88, 88);
         width:80%;
-        min-height:80%;
-        box-shadow:3px 3px 8px black;
+        min-height:100vh;
         &__headline{
             @include center();
             h1{
-                color:rgb(32, 32, 32);
+                color: rgb(245, 245, 245);
             }
             &__content{
                 display:flex;
@@ -112,14 +111,14 @@
                 transform: translateY(0%);
                 transition: .5s;
                 opacity:1;
-                box-shadow: 2px 2px 8px black;
             }
             &__content{
                 transform: translateY(-100%);
-                background-color: white;
+                background-color: rgb(75, 75, 75);
                 width:100%;
                 transition: .5s;
                 opacity:0;
+                color: rgb(245, 245, 245);
             }
         }
     }
@@ -208,55 +207,20 @@
         flex-direction: column;
         width:100%;
         margin-bottom: 25px;
-        &__menu{
-            position:absolute;
-            left:0;
-            top:0;
-            justify-content: center;
-            align-items: center;
-            &__window{
-                margin:0 auto;
-                height:50px;
-                padding:15px 30px;
-                background-color: rgb(187, 226, 248);
-                border-radius: 5px;
-                border:1px solid #afadac;
-                display:flex;
-                align-items: center;
-                flex-direction: column;
-                &__buttons{
-                    padding-top:10px;
-                    width:100%;
-                    display:flex;
-                    justify-content: space-between;
-                    button{
-                        border:none;
-                        border-radius: 5px;
-                        padding:3px 15px;
-                    }
-                    .delete{
-                        background-color: rgb(243, 95, 95);
-                        border:1px solid rgb(247, 70, 70);
-                    }
-                    .cancel{
-                        background-color: white;
-                        border:1px solid #afadac;
-                    }
-                }
-            }
-        }
         &__list{
             flex-wrap: wrap;
             width:95%;
             display:flex;
             flex-direction: row;
             margin: 25px auto 0 auto;
-            background-color: rgb(187, 226, 248);
-            border:1px solid rgb(129, 202, 245);
+            background-color: rgb(88, 88, 88);
             border-radius: 5px;
             &__item{
                 width:95%;
                 margin: 0 auto;
+                h1{
+                    color: rgb(245, 245, 245);
+                }
                 &__products{
                     display:flex;
                     flex-direction: row;
@@ -270,32 +234,21 @@
                         box-shadow: 2px 2px 6px black;
                         margin: 25px 25px 0 0;
                         position: relative;
+                        &:hover #img{
+                            opacity:1;
+                        }
+                        span{
+                            margin: 10px 0;
+                            color:black;
+                        }
                         .image{
                             width:100%;
                             display:flex;
                             justify-content: center;
                             img{
-                                margin-top:35px;
-                                width:75%;
-                                box-shadow: 2px 2px 6px black;
+                                width:100%;
                                 transition: .5s;
-                            }
-                        }
-                        .menageProduct{
-                            position: absolute;
-                            left:3px;
-                            top:3px;
-                            height:25px;
-                            width:25px;
-                            img{
-                                height:100%;
-                                opacity:0.75;
-                                transition: .5s;
-                                &:hover{
-                                    transform: rotate(95deg);
-                                    transition: .5s;
-                                    opacity:1;
-                                }
+                                border-bottom: 1px solid rgb(165, 165, 165);
                             }
                         }
                     }
@@ -311,9 +264,10 @@
                 button{
                     padding:6px 12px;
                     margin-left: 8px;
-                    background-color: rgb(187, 226, 248);
-                    border:1px solid rgb(145, 206, 241);
+                    background-color: white;
+                    border:1px solid rgb(128, 128, 128);
                     border-radius: 3px;
+                    color:black;
                 }
             }
             input{
@@ -349,7 +303,6 @@
 	}
 	100% {
 		height:100%;
-        box-shadow: 2px 2px 8px black;
 	}
 }
 

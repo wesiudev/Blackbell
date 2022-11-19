@@ -3,6 +3,10 @@ import {
   FETCH_PRODUCT,
   FETCH_PRODUCTS,
   REMOVE_PRODUCT,
+  EDIT_PRODUCT,
+  CLEAN_PRODUCT,
+  FETCHING_SINGLE_PRODUCT,
+  END_FETCHING_SINGLE_PRODUCT,
 } from "./actionTypes";
 import * as api from "../api";
 import { clearMessages, getMessages } from "./messages";
@@ -23,10 +27,22 @@ export const addProduct = (req) => async (dispatch) => {
   }
 };
 
-export const removeProduct = (req) => async (dispatch) => {
+export const deleteProduct = (req) => async (dispatch) => {
   try {
-    const { data } = await api.removeProduct(req);
+    const { data } = await api.deleteProduct(req);
     dispatch({ type: REMOVE_PRODUCT, data });
+  } catch (error) {
+    dispatch(getMessages(error.response.data.msg, "ERROR"));
+    setTimeout(() => {
+      dispatch(clearMessages());
+    }, 5000);
+  }
+};
+
+export const editProduct = (req) => async (dispatch) => {
+  try {
+    const { data } = await api.editProduct(req);
+    dispatch({ type: EDIT_PRODUCT, data });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {
@@ -48,12 +64,21 @@ export const fetchProducts = (req) => async (dispatch) => {
 };
 export const fetchProduct = (req) => async (dispatch) => {
   try {
+    dispatch({ type: FETCHING_SINGLE_PRODUCT });
     const { data } = await api.fetchProduct(req);
+    dispatch({ type: END_FETCHING_SINGLE_PRODUCT });
     dispatch({ type: FETCH_PRODUCT, data });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {
       dispatch(clearMessages());
     }, 5000);
+  }
+};
+export const cleanProduct = (req) => async (dispatch) => {
+  try {
+    dispatch({ type: CLEAN_PRODUCT });
+  } catch (error) {
+    console.log(error);
   }
 };

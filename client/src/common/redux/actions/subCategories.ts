@@ -1,4 +1,4 @@
-import { ADD_SUBCATEGORY, FETCH_SUBCATEGORIES, REMOVE_SUBCATEGORY } from "./actionTypes";
+import { ADD_SUBCATEGORY, FETCH_CATEGORIES, FETCH_SUBCATEGORIES, REMOVE_SUBCATEGORY } from "./actionTypes";
 import * as api from "../api";
 import { clearMessages, getMessages } from "./messages";
 
