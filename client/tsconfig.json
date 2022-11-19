@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "src/components/AdminTools/elements/productEditor/elements/feedItems/EditArrays/.tsx", "src/components/AdminTools/elements/productEditor/elements/feedItems/EditSubcategories/.tsx"  ]
 }

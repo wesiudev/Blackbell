@@ -1,23 +1,20 @@
-import React from "react";
-import { IProduct } from "../../../../../common/types/types";
-import pen from "../../../../../common/images/pen.png";
 interface IFeedItem {
   data: any;
-  setAttribute: Function;
+  setActionType: Function;
   label: string;
   name: string;
   headline: string;
 }
 
-const FeedItem = (props: IFeedItem) => {
+const RegularItem = (props: IFeedItem) => {
   return (
-    <div className="feed__item">
-      <div className="headline">
+    <div className="feedItem">
+      <div className="feedItem__headline">
         <h3>{props.headline}</h3>
         <button
           name={props.name}
           id={props.label}
-          onClick={(e) => props.setAttribute(e)}
+          onClick={(e) => props.setActionType(e)}
         >
           {" "}
           (edytuj)
@@ -37,4 +34,4 @@ const FeedItem = (props: IFeedItem) => {
   );
 };
 
-export default FeedItem;
+export default RegularItem;

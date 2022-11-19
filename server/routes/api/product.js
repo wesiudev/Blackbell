@@ -38,14 +38,12 @@ router.post("/createProduct", async (req, res) => {
       itemSubCategoryName: `${subCategory}`,
     };
     await Product.create(product);
-    console.log(product);
     const products = await Product.find({});
     res.status(200).json({
       data: products,
       msg: { id: "SUCCESS", text: "Pomyślnie dodano produkt." },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       msg: error.message,
     });
@@ -56,7 +54,6 @@ router.post("/deleteProduct", async (req, res) => {
   try {
     const { productId } = req.body;
     const itemToRemove = await Product.findOne({ productId });
-    console.log(itemToRemove);
     if (itemToRemove === null)
       throw Error(`Produkt ${productId} nie istnieje.`);
     await Product.findByIdAndDelete(productId);
@@ -183,7 +180,16 @@ router.post("/editProduct", async (req, res) => {
         { new: true }
       );
     }
-    if (actionType === "itemImages") {
+    if (actionType === "deleteImage") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $pull: { itemImages: { imageIndex: userInput } },
+        },
+        { new: true }
+      );
     }
     if (actionType === "itemCategoryName") {
       const targettedCategory = await Category.findOne({
@@ -216,7 +222,6 @@ router.post("/editProduct", async (req, res) => {
         { new: true }
       );
     }
-    console.log(updatedProduct);
     res.status(200).json({
       msg: {
         id: "SUCCESS",
@@ -235,7 +240,6 @@ router.post("/fetchProduct", async (req, res) => {
   try {
     const { productId } = req.body;
     const product = await Product.findOne({ _id: productId });
-    console.log(productId);
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({

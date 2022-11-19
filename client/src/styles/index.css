@@ -1423,6 +1423,7 @@ header .content .open span {
   justify-content: center;
   align-items: center;
   z-index: 100;
+  margin-top: 45px;
 }
 .editor__content {
   width: 500px;
@@ -1442,18 +1443,13 @@ header .content .open span {
   width: 10px;
   background-color: white;
 }
-.editor__content .closeEditor {
-  position: absolute;
-  top: 30px;
-  right: 20px;
-}
 .editor__content .inputMenu {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
 }
@@ -1464,45 +1460,6 @@ header .content .open span {
   flex-direction: column;
   background-color: white;
   box-shadow: 3px 3px 9px black;
-}
-.editor__content .inputMenu__content .list__subCategory hr {
-  width: 100%;
-}
-.editor__content .inputMenu__content .list__subCategory__items {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-.editor__content .inputMenu__content .list__subCategory__items__item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: relative;
-  cursor: pointer;
-}
-.editor__content .inputMenu__content .list__subCategory__items__item:hover {
-  background-color: #cfcfcf;
-}
-.editor__content .inputMenu__content .list__subCategory__items .chosenSubCategory {
-  position: absolute;
-  right: 0px;
-  background-color: red;
-}
-.editor__content .inputMenu__content .list__subCategory h2 {
-  text-align: center;
-}
-.editor__content .inputMenu__content .list__subCategory .inputRow {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.editor__content .inputMenu__content .list__subCategory .inputRow input {
-  width: 90%;
-  margin: 10px auto;
-}
-.editor__content .inputMenu__content .list__subCategory .inputRow button {
-  width: 100%;
-  margin: 0 auto;
 }
 .editor__content .inputMenu__content .buttons {
   display: flex;
@@ -1516,26 +1473,17 @@ header .content .open span {
   width: 95%;
   margin: 0 auto;
 }
-.editor__content .feed__item {
-  width: 100%;
-}
-.editor__content .feed__item .headline {
-  height: 35px;
+.editor__content .feed__topSide {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
-.editor__content .feed__item .headline button {
-  margin-top: 3px;
-  color: #9c9c9c;
-  font-size: 16px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-.editor__content .feed__item .headline button:hover {
-  color: #525252;
+.editor__content .feed__topSide .closeEditor {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .editor__content .feed hr {
   width: 100%;
@@ -1564,10 +1512,10 @@ header .content .open span {
 
 .itemloader {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   left: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1696,6 +1644,91 @@ header .content .open span {
     transform: rotate(360deg);
   }
 }
+.feedItem {
+  width: 100%;
+}
+.feedItem__headline {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+.feedItem__headline button {
+  margin-top: 3px;
+  color: #9c9c9c;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.feedItem__headline button:hover {
+  color: #525252;
+}
+
+.imagesMap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 45px;
+}
+.imagesMap__item {
+  height: 100%;
+  border: 1px solid rgb(175, 175, 175);
+}
+.imagesMap__item img {
+  height: 100%;
+}
+
+.modal__subCategory hr {
+  width: 100%;
+}
+.modal__subCategory__items {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.modal__subCategory__items__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+}
+.modal__subCategory__items__item:hover {
+  background-color: #cfcfcf;
+}
+.modal__subCategory__items .chosenSubCategory {
+  position: absolute;
+  right: 0px;
+  background-color: red;
+}
+.modal__subCategory h2 {
+  text-align: center;
+}
+.modal__subCategory .inputRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.modal__subCategory .inputRow input {
+  width: 90%;
+  margin: 10px auto;
+}
+.modal__subCategory .inputRow button {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.imagePreview {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.imagePreview__content .image img {
+  max-width: 300px;
+  border: 1px solid rgb(175, 175, 175);
+}
+
 body, html {
   box-sizing: border-box;
   padding: 0;
