@@ -23,10 +23,10 @@ const AdminTools = () => {
     const [currentlyEditingItem, setCurrentlyEditingItem] = useState<IProduct>();
 
     function editProduct(product: IProduct) {
+            dispatch(fetchProduct({productId: product._id}))
             setProductEditorOpened(true)
             setCurrentlyEditingItem(product)
     }
-    console.log(product)
     function setMessageStyles(){
         if (message.id === "ERROR") {
             return "#e76c6c"
@@ -37,7 +37,6 @@ const AdminTools = () => {
     function closeEditor() {
         setProductEditorOpened(false)
         dispatch(cleanProduct())
-        dispatch(fetchProducts())
     }
     const messageStyles = {
         backgroundColor: setMessageStyles()
@@ -55,7 +54,7 @@ const AdminTools = () => {
             )}
             
             <div className="panel">
-                {isProductEditorOpened ? <ProductEditor closeEditor={closeEditor} item={currentlyEditingItem!}/> : null}
+                {isProductEditorOpened ? <ProductEditor closeEditor={closeEditor} item={product ? product : currentlyEditingItem}/> : null}
                 <Headline text='Panel administracyjny' isMenuOpened={null} openMenu={null} />
                 <div className="hr"></div>
                 <Headline text='Zarządzaj produktami' isMenuOpened={isCategoryMenuOpened} openMenu={setCategoryMenuOpened}/>

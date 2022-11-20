@@ -28,32 +28,6 @@ const ProductEditor = (props: EditorProps) => {
   const fetchingProduct = useSelector(
     (state: any) => state.products.fetchingSingleProduct
   );
-  const [
-    {
-      itemName,
-      itemCategoryName,
-      itemColor,
-      itemDescription,
-      itemImages,
-      itemPrice,
-      itemQuantity,
-      _id,
-      subCategory,
-      itemSize,
-    },
-    setProductData,
-  ] = useState<IProduct>({
-    itemName: "" || props.item.itemName,
-    itemCategoryName: "" || props.item.itemCategoryName,
-    itemColor: "" || props.item.itemColor,
-    itemDescription: "" || props.item.itemDescription,
-    itemImages: [] || props.item.itemImages,
-    itemPrice: 0 || props.item.itemPrice,
-    itemQuantity: 0 || props.item.itemQuantity,
-    itemSize: "" || props.item.itemSize,
-    subCategory: "" || props.item.subCategory,
-    _id: "" || props.item._id,
-  });
   const [currentInputValue, setCurrentInputValue] = useState<string>("");
   const [inputLabel, setInputLabel] = useState<string>("");
   const [attributeToChange, setAttributeToChange] = useState<string>("");
@@ -66,6 +40,7 @@ const ProductEditor = (props: EditorProps) => {
   const [isImagePreviewOpened, setImagePreviewOpened] =
     useState<boolean>(false);
   const [currentImagePreview, setCurrentImagePreview] = useState<string>("");
+  const [realImageSource, setRealImageSource] = useState<string>("");
   const [isImageUploadOpened, setImageUploadOpened] = useState<boolean>(false);
 
   function handleProductEditation() {
@@ -77,8 +52,21 @@ const ProductEditor = (props: EditorProps) => {
     dispatch(editProduct(req));
     setInputVisibility(false);
     setCurrentInputValue("");
-    setImagePreviewOpened(false);
-    setImageUploadOpened(false);
+    setCurrentImagePreview("")
+    setImagePreviewOpened(false)
+  }
+  function handleImageUpload() {
+    const req = {
+      productId: props?.item?._id,
+      thumbnail: currentInputValue,
+      realImage: realImageSource,
+      actionType: attributeToChange,
+    };
+    dispatch(editProduct(req));
+    setInputVisibility(false);
+    setCurrentInputValue("");
+    setImageUploadOpened(false)
+    setCurrentImagePreview("")
   }
 
   function setActionType(e: any) {
@@ -102,7 +90,7 @@ const ProductEditor = (props: EditorProps) => {
   function createSubcategory() {
     const req = {
       subCategory: subCategoryToAdd,
-      category: itemCategoryName!,
+      category: props?.item?.itemCategoryName,
       actionType: "ADD",
     };
     dispatch(addSubCategory(req));
@@ -112,9 +100,9 @@ const ProductEditor = (props: EditorProps) => {
   }, []);
 
   function removeItemFromItemStorage() {
-    dispatch(deleteProduct({ productId: _id }));
+    dispatch(deleteProduct({ productId: props.item._id }));
     props.closeEditor();
-    dispatch(fetchProduct({ productId: _id }));
+    dispatch(fetchProduct({ productId: props?.item?._id }));
   }
 
   function handleSubcategorySelection(item: string) {
@@ -149,11 +137,12 @@ const ProductEditor = (props: EditorProps) => {
           <div className="inputMenu">
             <div className="inputMenu__content">
               <ImageUpload
-                uploadHandler={handleProductEditation}
+                uploadHandler={handleImageUpload}
                 quitInput={quitInput}
                 currentImage={currentImagePreview}
                 setCurrentImage={setCurrentImagePreview}
                 setCurrentInputValue={setCurrentInputValue}
+                setRealImageSource={setRealImageSource}
               />
             </div>
           </div>

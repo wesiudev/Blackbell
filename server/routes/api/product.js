@@ -37,7 +37,23 @@ router.post("/createProduct", async (req, res) => {
       itemCategoryName: `${category}`,
       itemSubCategoryName: `${subCategory}`,
     };
-    await Product.create(product);
+    const newProduct = await Product.create(product);
+    if (itemImages.length) {
+      const freshImages = newProduct.itemImages.map((image, i) => ({
+        _id: image._id,
+        index: i,
+      }));
+      const primaryImage = freshImages.find((image) => image.index === 0);
+      await Product.findByIdAndUpdate(
+        {
+          _id: newProduct._id,
+        },
+        {
+          $set: { primaryImage: primaryImage._id },
+        }
+      );
+    }
+
     const products = await Product.find({});
     res.status(200).json({
       data: products,
@@ -108,7 +124,8 @@ router.post("/moveProduct", async (req, res) => {
 
 router.post("/editProduct", async (req, res) => {
   try {
-    const { productId, userInput, actionType } = req.body;
+    const { productId, userInput, actionType, thumbnail, realPicture } =
+      req.body;
     const itemToEdit = await Product.findById(productId);
     if (itemToEdit === null) throw Error(`Produkt ${productId} nie istnieje.`);
 
@@ -190,6 +207,21 @@ router.post("/editProduct", async (req, res) => {
         },
         { new: true }
       );
+      if (updatedProduct.itemImages.length) {
+        const freshImages = updatedProduct.itemImages.map((image, i) => ({
+          _id: image._id,
+          index: i,
+        }));
+        const newPrimaryImage = freshImages.find((image) => image.index === 0);
+        updatedProduct = await Product.findByIdAndUpdate(
+          {
+            _id: updatedProduct._id,
+          },
+          {
+            $set: { primaryImage: newPrimaryImage._id },
+          }
+        );
+      }
     }
     if (actionType === "itemImages") {
       const product = await Product.findOne({ _id: productId });
@@ -205,8 +237,8 @@ router.post("/editProduct", async (req, res) => {
         {
           $push: {
             itemImages: {
-              imageSrc: userInput,
-              imageIndex: imageIndex,
+              thumbnail: thumbnail,
+              realPicture: realPicture,
             },
           },
         },

@@ -32,11 +32,11 @@ const ImagesItem = (props: IFeedItem) => {
             {props?.data?.map((image: Image) => (
               <div
                 onClick={() =>
-                  props.openImagePreview(image.imageSrc, image._id)
+                  props.openImagePreview(image.thumbnail, image._id)
                 }
                 className="imagesMap__item"
               >
-                <img src={image.imageSrc} alt="" />
+                <img src={image.thumbnail} alt="" />
               </div>
             ))}{" "}
             {props.name === "itemPrice" ? "PLN" : null}

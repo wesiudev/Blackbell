@@ -5,7 +5,9 @@ import Select from "../select/select";
 import { getCategories } from '../../../../common/redux/actions/categories'
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../../../common/redux/actions/product";
-
+import Resizer from "react-image-file-resizer";
+import { storage } from '../../../../common/firebase/firebase'
+import { ref, uploadBytes } from "firebase/storage"
 
 type Product = {
   itemName: string | undefined;
@@ -17,9 +19,8 @@ type Product = {
 };
 
 type imageObject = {
-  imageSrc: string
-  imageName: string
-  imageIndex: string
+  thumbnail: any
+  realPicture: string
 }
 
 export const NewProduct = () => {
@@ -39,29 +40,6 @@ export const NewProduct = () => {
     itemSize: "",
     itemColor: "",
   });
-
-  function addImageToUserInput(base64: any) {
-    const itemToPush = {
-      imageSrc: base64.base64,
-      imageName: base64.name,
-      imageIndex: `${itemImages.length+1}`
-    }
-    setImageItems(itemImages => [...itemImages, itemToPush]);
-    setImageNames(imageNames => [...imageNames, {name: base64.name}]);
-  }
-
-  const handleTextInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setProductData({
-      itemName, itemPrice, itemDescription, itemQuantity, itemSize, itemColor,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const categoryOptions = categories?.data?.map((itemName: any, i: number) => ({itemName: itemName.categoryName, itemId: `${i+1}`}))
-  
-  useEffect(() => {
-    dispatch(getCategories())
-  }, [])
   
   function createProduct() {
     const req = {
@@ -77,6 +55,74 @@ export const NewProduct = () => {
     dispatch(addProduct(req));
     dispatch(getCategories())
   }
+
+  const resizeImageForFirebase = (file: any) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        1000,
+        1000,
+        "png",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "file"
+      );
+    });
+
+  const resizeImageForMongo = (file: any) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        400,
+        400,
+        "png",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    });
+
+    const addImageToUserInput = async (e: any) => {
+    try{
+    if (!e.target.files[0]) return
+      const fireBaseImage: any = await resizeImageForFirebase(e.target.files[0])
+      const mongoImage: any = await resizeImageForMongo(e.target.files[0])
+      //in pseudo randomness we trust 🙏
+      const pseudoRandomName = Math.floor(Math.random()*9999*100).toString()
+      const imageRef = ref(storage, `images/image-${pseudoRandomName}`)
+      uploadBytes(imageRef, fireBaseImage).then(() => 
+        console.log("STOP LOADING")
+      )
+      const itemToPush = {
+        thumbnail:mongoImage,
+        realPicture: `image-${pseudoRandomName}`
+      }
+    setImageItems(itemImages => [...itemImages, itemToPush]);
+    setImageNames(imageNames => [...imageNames, {name: `image-${pseudoRandomName}`}]);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+  const handleTextInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setProductData({
+      itemName, itemPrice, itemDescription, itemQuantity, itemSize, itemColor,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const categoryOptions = categories?.data?.map((itemName: any, i: number) => ({itemName: itemName.categoryName, itemId: `${i+1}`}))
+  
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [])
+
   return (
     <div className="newProduct">
       <div className="newProduct__content">
@@ -85,11 +131,11 @@ export const NewProduct = () => {
             options={categoryOptions}
             onSelect={setCategory}
           />
-          <FileBase
-            type="file"
-            multiple={false}
-            onDone={(base64: any) => addImageToUserInput(base64)}
-          />
+          <input
+          type="file"
+          multiple={false}
+          onChange={(e: any) => addImageToUserInput(e)}
+        />
           <div>
           {imageNames?.length > 0 && (<h3>Wybrane zdjęcia:</h3>)}
           <ol>

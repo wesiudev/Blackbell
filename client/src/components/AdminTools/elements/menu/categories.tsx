@@ -132,9 +132,9 @@ export const MenageCategories = ({
                   <div onClick={() => editProduct(product)} className="categories__content__list__item__products__product">
                     {product.itemImages.map((image: Image) => (
                       <div className="image">
-                        {image.imageIndex === "1" ? (
+                        {image._id === product.primaryImage ? (
                           <div>
-                          <img src={image.imageSrc} alt="" />
+                          <img src={image.thumbnail} alt="" />
                           
                           </div>
                         ) : null}

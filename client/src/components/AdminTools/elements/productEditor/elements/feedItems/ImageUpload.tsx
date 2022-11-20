@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import FileBase from "react-file-base64";
-import { IProduct } from "../../../../../../common/types/types";
 import Resizer from "react-image-file-resizer";
+import { storage } from '../../../../../../common/firebase/firebase'
+import { ref, uploadBytes } from "firebase/storage"
+import { useState } from "react";
 
 type PreviewProps = {
   uploadHandler: Function;
@@ -9,15 +9,31 @@ type PreviewProps = {
   currentImage: string;
   setCurrentImage: Function;
   setCurrentInputValue: Function;
+  setRealImageSource: Function;
 };
 const ImageUpload = (props: PreviewProps) => {
-  const resizeFile = (file: any) =>
+  const resizeImageForFirebase = (file: any) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
         1000,
         1000,
-        "JPEG",
+        "png",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "file"
+      );
+    });
+  const resizeImageForMongo = (file: any) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "png",
         100,
         0,
         (uri) => {
@@ -26,13 +42,20 @@ const ImageUpload = (props: PreviewProps) => {
         "base64"
       );
     });
-    
   const setValues = async (e: any) => {
     try {
-      const file = e.target.files[0];
-      const image: any = await resizeFile(file);
-      props.setCurrentInputValue(image);
-      props.setCurrentImage(image);
+      if (!e.target.files[0]) return
+      const fireBaseImage: any = await resizeImageForFirebase(e.target.files[0])
+      const mongoImage: any = await resizeImageForMongo(e.target.files[0])
+      //in pseudo randomness we trust 🙏
+      const pseudoRandom = Math.floor(Math.random()*9999*100).toString()
+      const imageRef = ref(storage, `images/image-${pseudoRandom}`)
+      uploadBytes(imageRef, fireBaseImage).then(() => {
+         props.setCurrentInputValue(mongoImage);
+         props.setCurrentImage(mongoImage);
+         props.setRealImageSource(pseudoRandom);
+      })
+      
     } catch (err) {
       console.log(err);
     }

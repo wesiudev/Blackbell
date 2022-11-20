@@ -5,16 +5,16 @@ export interface IProduct {
     itemQuantity: number | null;
     itemSize: string | undefined;
     itemColor: string | undefined;
-    itemImages: Image[] | any
-    itemCategoryName: string | undefined
-    subCategory: string | undefined
-    _id: string | undefined
+    itemImages: Image[] | any[]
+    itemCategoryName: string
+    subCategory: string
+    primaryImage: string
+    _id: string 
   };
 
   export type Image = {
-    imageSrc: string,
-    imageName: string,
-    imageIndex: string
+    realPicture: string,
+    thumbnail: string
     _id: string
   }
   export interface ISubCategory {
@@ -22,7 +22,7 @@ export interface IProduct {
     relatedCategoryName: string
   }
   export interface ICategory {
-    categoryName: string | undefined
+    categoryName: string 
     subCategories: ISubCategory[]
   }
 
