@@ -8,13 +8,14 @@ import { addSubCategory } from "../../../../common/redux/actions/subCategories";
 import { getCategories } from "../../../../common/redux/actions/categories";
 import { deleteProduct } from "../../../../common/redux/actions/product";
 
-import { IProduct, ISubCategory } from "../../../../common/types/types";
+import { Image, IProduct, ISubCategory } from "../../../../common/types/types";
 import ItemLoader from "./elements/itemLoader/itemLoader";
 import RegularItem from "./elements/feedItems/RegularItem";
-import ImagesItem from "./elements/feedItems/ImagesItem";
-import EditSubCategories from "./elements/feedItems/EditArrays/EditSubCategories";
+import ImagesItem from "./elements/feedItems/ImagesList";
+import EditSubCategories from "./elements/feedItems/EditSubCategories";
 import ActionButtons from "./elements/ActionButtons";
 import ImagePreview from "./elements/feedItems/ImagePreview";
+import ImageUpload from "./elements/feedItems/ImageUpload";
 
 type EditorProps = {
   item: IProduct;
@@ -27,6 +28,32 @@ const ProductEditor = (props: EditorProps) => {
   const fetchingProduct = useSelector(
     (state: any) => state.products.fetchingSingleProduct
   );
+  const [
+    {
+      itemName,
+      itemCategoryName,
+      itemColor,
+      itemDescription,
+      itemImages,
+      itemPrice,
+      itemQuantity,
+      _id,
+      subCategory,
+      itemSize,
+    },
+    setProductData,
+  ] = useState<IProduct>({
+    itemName: "" || props.item.itemName,
+    itemCategoryName: "" || props.item.itemCategoryName,
+    itemColor: "" || props.item.itemColor,
+    itemDescription: "" || props.item.itemDescription,
+    itemImages: [] || props.item.itemImages,
+    itemPrice: 0 || props.item.itemPrice,
+    itemQuantity: 0 || props.item.itemQuantity,
+    itemSize: "" || props.item.itemSize,
+    subCategory: "" || props.item.subCategory,
+    _id: "" || props.item._id,
+  });
   const [currentInputValue, setCurrentInputValue] = useState<string>("");
   const [inputLabel, setInputLabel] = useState<string>("");
   const [attributeToChange, setAttributeToChange] = useState<string>("");
@@ -39,6 +66,7 @@ const ProductEditor = (props: EditorProps) => {
   const [isImagePreviewOpened, setImagePreviewOpened] =
     useState<boolean>(false);
   const [currentImagePreview, setCurrentImagePreview] = useState<string>("");
+  const [isImageUploadOpened, setImageUploadOpened] = useState<boolean>(false);
 
   function handleProductEditation() {
     const req = {
@@ -47,10 +75,10 @@ const ProductEditor = (props: EditorProps) => {
       actionType: attributeToChange,
     };
     dispatch(editProduct(req));
-    dispatch(fetchProduct({ productId: props?.item?._id }));
     setInputVisibility(false);
     setCurrentInputValue("");
     setImagePreviewOpened(false);
+    setImageUploadOpened(false);
   }
 
   function setActionType(e: any) {
@@ -58,6 +86,8 @@ const ProductEditor = (props: EditorProps) => {
     setInputLabel(e.target.id);
     setInputVisibility(true);
     checkAttributeToChange(e.target.name);
+    setImageUploadOpened(true);
+    setCurrentImagePreview("");
   }
 
   function quitInput() {
@@ -65,12 +95,14 @@ const ProductEditor = (props: EditorProps) => {
     setCurrentInputValue("");
     setInputVisibility(false);
     setDefaultAttributeMenu(false);
+    setImageUploadOpened(false);
+    setCurrentImagePreview("");
   }
 
   function createSubcategory() {
     const req = {
       subCategory: subCategoryToAdd,
-      category: props?.item?.itemCategoryName,
+      category: itemCategoryName!,
       actionType: "ADD",
     };
     dispatch(addSubCategory(req));
@@ -80,8 +112,9 @@ const ProductEditor = (props: EditorProps) => {
   }, []);
 
   function removeItemFromItemStorage() {
-    dispatch(deleteProduct({ productId: props.item._id }));
+    dispatch(deleteProduct({ productId: _id }));
     props.closeEditor();
+    dispatch(fetchProduct({ productId: _id }));
   }
 
   function handleSubcategorySelection(item: string) {
@@ -112,6 +145,19 @@ const ProductEditor = (props: EditorProps) => {
   return (
     <div className="editor">
       <div className="editor__content">
+        {isImageUploadOpened && attributeToChange === "itemImages" ? (
+          <div className="inputMenu">
+            <div className="inputMenu__content">
+              <ImageUpload
+                uploadHandler={handleProductEditation}
+                quitInput={quitInput}
+                currentImage={currentImagePreview}
+                setCurrentImage={setCurrentImagePreview}
+                setCurrentInputValue={setCurrentInputValue}
+              />
+            </div>
+          </div>
+        ) : null}
         {isImagePreviewOpened && attributeToChange === "deleteImage" ? (
           <div className="inputMenu">
             <div className="inputMenu__content">
@@ -235,6 +281,7 @@ const ProductEditor = (props: EditorProps) => {
             name="itemImages"
             headline="Zdjęcia"
             openImagePreview={openImagePreviewModal}
+            setImageUploadOpened={setImageUploadOpened}
           />
           <div style={{ marginTop: "55px" }}>
             {!deleteInsurance ? (

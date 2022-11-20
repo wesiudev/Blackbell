@@ -41,8 +41,10 @@ export const deleteProduct = (req) => async (dispatch) => {
 
 export const editProduct = (req) => async (dispatch) => {
   try {
+    dispatch({ type: FETCHING_SINGLE_PRODUCT });
     const { data } = await api.editProduct(req);
     dispatch({ type: EDIT_PRODUCT, data });
+    dispatch({ type: END_FETCHING_SINGLE_PRODUCT });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {
@@ -66,8 +68,8 @@ export const fetchProduct = (req) => async (dispatch) => {
   try {
     dispatch({ type: FETCHING_SINGLE_PRODUCT });
     const { data } = await api.fetchProduct(req);
-    dispatch({ type: END_FETCHING_SINGLE_PRODUCT });
     dispatch({ type: FETCH_PRODUCT, data });
+    dispatch({ type: END_FETCHING_SINGLE_PRODUCT });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {

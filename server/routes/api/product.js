@@ -186,7 +186,29 @@ router.post("/editProduct", async (req, res) => {
           _id: productId,
         },
         {
-          $pull: { itemImages: { imageIndex: userInput } },
+          $pull: { itemImages: { _id: userInput } },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "itemImages") {
+      const product = await Product.findOne({ _id: productId });
+
+      const imageIndex = Math.floor(
+        product.itemImages.length + 1 + Math.random() * 100
+      ).toString();
+
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $push: {
+            itemImages: {
+              imageSrc: userInput,
+              imageIndex: imageIndex,
+            },
+          },
         },
         { new: true }
       );

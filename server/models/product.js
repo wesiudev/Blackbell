@@ -10,6 +10,7 @@ const productSchema = mongoose.Schema({
   itemCategoryID: String,
   itemCategoryName: String,
   subCategory: String,
+  primaryImage: String,
   itemImages: [
     {
       imageSrc: String,

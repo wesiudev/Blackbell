@@ -2,7 +2,7 @@ import React from "react";
 import {
   IProduct,
   ISubCategory,
-} from "../../../../../../../common/types/types";
+} from "../../../../../../common/types/types";
 
 type SubCategoriesEditor = {
   subCategories: any;

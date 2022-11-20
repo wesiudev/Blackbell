@@ -7,6 +7,7 @@ interface IFeedItem {
   name: string;
   headline: string;
   openImagePreview: Function;
+  setImageUploadOpened: Function;
 }
 
 const ImagesItem = (props: IFeedItem) => {
@@ -31,7 +32,7 @@ const ImagesItem = (props: IFeedItem) => {
             {props?.data?.map((image: Image) => (
               <div
                 onClick={() =>
-                  props.openImagePreview(image.imageSrc, image.imageIndex)
+                  props.openImagePreview(image.imageSrc, image._id)
                 }
                 className="imagesMap__item"
               >

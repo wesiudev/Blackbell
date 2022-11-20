@@ -6,22 +6,23 @@ export interface IProduct {
     itemSize: string | undefined;
     itemColor: string | undefined;
     itemImages: Image[] | any
-    itemCategoryName: string
-    subCategory: string
-    _id: string
+    itemCategoryName: string | undefined
+    subCategory: string | undefined
+    _id: string | undefined
   };
 
   export type Image = {
     imageSrc: string,
     imageName: string,
     imageIndex: string
+    _id: string
   }
   export interface ISubCategory {
     subCategoryName: string
     relatedCategoryName: string
   }
   export interface ICategory {
-    categoryName: string
+    categoryName: string | undefined
     subCategories: ISubCategory[]
   }
 

@@ -23,7 +23,6 @@ const AdminTools = () => {
     const [currentlyEditingItem, setCurrentlyEditingItem] = useState<IProduct>();
 
     function editProduct(product: IProduct) {
-        dispatch(fetchProduct({ productId: product?._id }));
             setProductEditorOpened(true)
             setCurrentlyEditingItem(product)
     }
@@ -56,7 +55,7 @@ const AdminTools = () => {
             )}
             
             <div className="panel">
-                {isProductEditorOpened ? <ProductEditor closeEditor={closeEditor} item={product}/> : null}
+                {isProductEditorOpened ? <ProductEditor closeEditor={closeEditor} item={currentlyEditingItem!}/> : null}
                 <Headline text='Panel administracyjny' isMenuOpened={null} openMenu={null} />
                 <div className="hr"></div>
                 <Headline text='Zarządzaj produktami' isMenuOpened={isCategoryMenuOpened} openMenu={setCategoryMenuOpened}/>
