@@ -31,6 +31,7 @@ const ImagesItem = (props: IFeedItem) => {
           <div className="map">
             {props?.data?.map((image: Image) => (
               <div
+              key={image._id}
                 onClick={() =>
                   props.openImagePreview(image.thumbnail, image._id)
                 }

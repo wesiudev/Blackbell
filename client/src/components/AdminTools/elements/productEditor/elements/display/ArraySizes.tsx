@@ -3,20 +3,20 @@ import { useState } from "react";
 interface IFeedItem {
   data: any;
   setActionType: Function;
-  deleteColor: Function;
+  deleteSize: Function;
   editProduct: Function;
   label: string;
   name: string;
   headline: string;
 }
 
-const ArrayColors = (props: IFeedItem) => {
+const ArraySizes = (props: IFeedItem) => {
   const [deleteInsurance, setDeleteInsurance] = useState<boolean>(false);
-  const [colorToDelete, setColorToDelete] = useState<string>("");
-  function deleteItem(id: string, color: string) {
+  const [sizeToDelete, setSizeToDelete] = useState<string>("");
+  function deleteItem(id: string, size: string) {
     setDeleteInsurance(true);
-    setColorToDelete(color);
-    props.deleteColor(id);
+    setSizeToDelete(size);
+    props.deleteSize(id);
   }
 
   return (
@@ -34,27 +34,28 @@ const ArrayColors = (props: IFeedItem) => {
       </div>
       <div>
         {!props?.data?.length ? (
-          "Brak kolorów."
+          "Brak rozmiarów."
         ) : (
           <div className="map">
-            {props?.data?.map((item: any, idx: number) => (
-              <div  key={idx}>
+            {props?.data?.map((item: any) => (
+              <div key={item._id} style={{alignItems: 'center'}}>
                 <div
-                  onClick={() => deleteItem(item._id, item.color)}
-                  style={{ backgroundColor: `${item.color}`,border:'1px solid rgb(99,99,99)' }}
-                  className="map__color"
-                ></div>
-                {deleteInsurance && colorToDelete === item.color ? (
+                style={{height:'25px',borderRadius:'5px',backgroundColor:'rgb(99,99,99)', color:'white',textAlign:'center',padding:'0 5px', cursor:'pointer'}}
+                  onClick={() => deleteItem(item._id, item.size)}
+                  className="map__item"
+                >{item.size}</div>
+                {deleteInsurance && sizeToDelete === item.size ? (
                   <>
                     {" "}
                     <button
                       onClick={() => props.editProduct()}
-                      style={{ backgroundColor: "#f37b7b", border: "none" }}
+                      style={{ height:'25px', backgroundColor: "#f37b7b", border: "none" }}
                       className="btnCancel"
                     >
-                      Usunąć kolor?
+                      Usunąć?
                     </button>
                     <button
+                    style={{height:'25px', }}
                       onClick={() => setDeleteInsurance(false)}
                       className="btnSave"
                     >
@@ -71,4 +72,4 @@ const ArrayColors = (props: IFeedItem) => {
   );
 };
 
-export default ArrayColors;
+export default ArraySizes;

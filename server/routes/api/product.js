@@ -175,24 +175,24 @@ router.post("/editProduct", async (req, res) => {
         { new: true }
       );
     }
-    if (actionType === "itemSize") {
+    if (actionType === "addSize") {
       updatedProduct = await Product.findByIdAndUpdate(
         {
           _id: productId,
         },
         {
-          $set: { itemSize: userInput },
+          $push: { itemSize: userInput },
         },
         { new: true }
       );
     }
-    if (actionType === "itemColor") {
+    if (actionType === "addColor") {
       updatedProduct = await Product.findByIdAndUpdate(
         {
           _id: productId,
         },
         {
-          $set: { itemColor: userInput },
+          $push: { itemColor: userInput },
         },
         { new: true }
       );
@@ -204,6 +204,17 @@ router.post("/editProduct", async (req, res) => {
         },
         {
           $pull: { itemColor: { _id: userInput } },
+        },
+        { new: true }
+      );
+    }
+    if (actionType === "deleteSize") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $pull: { itemSize: { _id: userInput } },
         },
         { new: true }
       );

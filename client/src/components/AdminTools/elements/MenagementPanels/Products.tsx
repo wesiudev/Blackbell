@@ -124,14 +124,14 @@ export const MenageProducts = ({
           </div>
         </div>
         {array?.map((item: any, idx: number) => (
-          <div className="categories__content__list">
+          <div key={idx} className="categories__content__list">
             <div className="categories__content__list__item">
               <h1>{item.category}</h1>
               <div className="categories__content__list__item__products">
                 {item?.products?.map((product: IProduct, idx: number) => (
-                  <div onClick={() => editProduct(product)} className="categories__content__list__item__products__product">
+                  <div key={idx} onClick={() => editProduct(product)} className="categories__content__list__item__products__product">
                     {product.itemImages.map((image: Image) => (
-                      <div className="image">
+                      <div key={image._id} className="image">
                         {image._id === product.primaryImage ? (
                           <div>
                           <img src={image.thumbnail} alt="" />

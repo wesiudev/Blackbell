@@ -17,12 +17,14 @@ import ActionButtons from "./elements/ActionButtons";
 import ImagePreview from "./elements/edit/ImagePreview";
 import ImageUpload from "./elements/edit/ImageUpload";
 import ArrayColors from "./elements/display/ArrayColors";
+import ArraySizes from "./elements/display/ArraySizes";
+import EditArray from "./elements/edit/EditArray";
 
 type EditorProps = {
   item: IProduct;
   closeEditor: Function;
-  setChangesWereCommitted: Function
-  changesWereCommitted: boolean
+  setChangesWereCommitted: Function;
+  changesWereCommitted: boolean;
 };
 
 const ProductEditor = (props: EditorProps) => {
@@ -31,7 +33,7 @@ const ProductEditor = (props: EditorProps) => {
   const fetchingProduct = useSelector(
     (state: any) => state.products.fetchingSingleProduct
   );
-  const [currentInputValue, setCurrentInputValue] = useState<string>("");
+  const [currentInputValue, setCurrentInputValue] = useState<any>();
   const [inputLabel, setInputLabel] = useState<string>("");
   const [attributeToChange, setAttributeToChange] = useState<string>("");
   const [isInputVisible, setInputVisibility] = useState<boolean>(false);
@@ -58,14 +60,17 @@ const ProductEditor = (props: EditorProps) => {
     dispatch(editProduct(req));
     setInputVisibility(false);
     setCurrentInputValue("");
-    setCurrentImagePreview("")
-    setImagePreviewOpened(false)
-    setImageUploadOpened(false)
-    props.changesWereCommitted && dispatch(fetchProduct({productId: props.item._id}))
-    props.setChangesWereCommitted(true)
-    }
-  
+    setCurrentImagePreview("");
+    setImagePreviewOpened(false);
+    setImageUploadOpened(false);
+    props.changesWereCommitted &&
+      dispatch(fetchProduct({ productId: props.item._id }));
+    props.setChangesWereCommitted(true);
+  }
+
   function setActionType(e: any) {
+    setCurrentInputValue("");
+    setAttributeToChange("");
     setAttributeToChange(e.target.name);
     setInputLabel(e.target.id);
     setInputVisibility(true);
@@ -81,7 +86,8 @@ const ProductEditor = (props: EditorProps) => {
     setDefaultAttributeMenu(false);
     setImageUploadOpened(false);
     setCurrentImagePreview("");
-    props.changesWereCommitted && dispatch(fetchProduct({productId: props.item._id}))
+    props.changesWereCommitted &&
+      dispatch(fetchProduct({ productId: props.item._id }));
   }
 
   function createSubcategory() {
@@ -91,7 +97,7 @@ const ProductEditor = (props: EditorProps) => {
       actionType: "ADD",
     };
     dispatch(addSubCategory(req));
-    props.setChangesWereCommitted(true)
+    props.setChangesWereCommitted(true);
   }
   useEffect(() => {
     dispatch(getCategories());
@@ -99,7 +105,7 @@ const ProductEditor = (props: EditorProps) => {
 
   function removeItemFromItemStorage() {
     dispatch(deleteProduct({ productId: props.item._id }));
-    props.setChangesWereCommitted(true)
+    props.setChangesWereCommitted(true);
     props.closeEditor();
   }
 
@@ -128,27 +134,63 @@ const ProductEditor = (props: EditorProps) => {
     setCurrentInputValue(imageIndex);
   }
 
-  function deleteColor(id: string){
+  function deleteColor(id: string) {
     setCurrentInputValue(id);
     setAttributeToChange("deleteColor");
+  }
+
+  function deleteSize(id: string) {
+    setCurrentInputValue(id);
+    setAttributeToChange("deleteSize");
   }
 
   return (
     <div className="editor">
       <div className="editor__content">
-      {isEditArrayOpened ? (
+        {attributeToChange === "addSize" || attributeToChange === "addColor" ? (
           <div className="inputMenu">
             <div className="inputMenu__content">
-              <ImageUpload
-                uploadHandler={handleProductEditation}
-                quitInput={quitInput}
-                currentImage={currentImagePreview}
-                setCurrentImage={setCurrentImagePreview}
-                setCurrentInputValue={setCurrentInputValue}
-                setRealImageSource={setRealImageSource}
-              />
+              <div style={{ width: "100%" }}>
+                <h3 style={{ textAlign: "left", marginTop: "0px" }}>
+                  {inputLabel}
+                </h3>
+                {attributeToChange === "addSize" ? (
+                  <input
+                    autoFocus
+                    onChange={(e) =>
+                      setCurrentInputValue({ size: e.target.value })
+                    }
+                    type="text"
+                    value={currentInputValue.size}
+                  />
+                ) : (
+                  <input
+                    style={{ width: "200px" }}
+                    autoFocus
+                    onChange={(e) =>
+                      setCurrentInputValue({ color: e.target.value })
+                    }
+                    type="color"
+                    value={currentInputValue.color}
+                  />
+                )}
+                <ActionButtons
+                  handleProductEditation={handleProductEditation}
+                  quitInput={quitInput}
+                />
+              </div>
             </div>
           </div>
+        ) : null}
+        {isEditArrayOpened ? (
+          <ImageUpload
+            uploadHandler={handleProductEditation}
+            quitInput={quitInput}
+            currentImage={currentImagePreview}
+            setCurrentImage={setCurrentImagePreview}
+            setCurrentInputValue={setCurrentInputValue}
+            setRealImageSource={setRealImageSource}
+          />
         ) : null}
         {isImageUploadOpened && attributeToChange === "itemImages" ? (
           <div className="inputMenu">
@@ -252,13 +294,15 @@ const ProductEditor = (props: EditorProps) => {
             name="itemQuantity"
             headline="Ilość"
           />
-          {/* <RegularItem
+          <ArraySizes
             data={props.item.itemSize}
             setActionType={setActionType}
+            deleteSize={deleteSize}
+            editProduct={handleProductEditation}
             label="Dodaj rozmiary"
-            name="itemSize"
+            name="addSize"
             headline="Rozmiary"
-          /> */}
+          />
           <ArrayColors
             data={props.item.itemColor}
             setActionType={setActionType}
