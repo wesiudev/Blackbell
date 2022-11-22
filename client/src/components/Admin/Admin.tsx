@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { LOGOUT } from '../../common/redux/actions/actionTypes';
-import { signInAdmin } from '../../common/redux/actions/owner';
+import { signInAdmin } from '../../common/redux/actions/auth';
 import AdminTools from '../AdminTools/AdminTools';
 import decode from "jwt-decode";
 const Admin = () => {

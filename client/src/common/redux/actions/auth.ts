@@ -14,7 +14,7 @@ export const signin =
       const { data } = await api.signIn(userInput);
       dispatch({ type: AUTH, data });
     } catch (error: any) {
-      dispatch(getMessages(error.response.data.msg, GET_MESSAGES));
+      dispatch(getMessages(error?.response?.data?.msg, GET_MESSAGES));
       setTimeout(() => {
         dispatch(clearMessages());
       }, 5000);
@@ -28,7 +28,7 @@ export const signup =
       const { data } = await api.signUp(userInput);
       dispatch({ type: AUTH, data });
     } catch (error: any) {
-      dispatch(getMessages(error.response.data.msg, GET_MESSAGES));
+      dispatch(getMessages(error?.response?.data?.msg, GET_MESSAGES));
       setTimeout(() => {
         dispatch(clearMessages());
       }, 5000);
@@ -42,7 +42,7 @@ export const signInAdmin =
       const { data } = await api.signInAdmin(userInput);
       dispatch({ type: OWNER_AUTH, data });
     } catch (error: any) {
-      dispatch(getMessages(error.response.data.msg, GET_MESSAGES));
+      dispatch(getMessages(error?.response?.data?.msg, GET_MESSAGES));
       setTimeout(() => {
         dispatch(clearMessages());
       }, 5000);
