@@ -25,7 +25,7 @@ export default function App(){
       <ParallaxProvider>
         <BrowserRouter>
         <Header isEngContent={isEngContent} setEngContent={setEngContent}/>
-        {/* {isFirstLoad ? <Loader visible={true}/> : <Loader visible={false}/>} */}
+        {isFirstLoad ? <Loader visible={true}/> : <Loader visible={false}/>}
           <Switch>
             <Route path="/" exact component={() => Home(isFirstLoad, isEngContent)} />
             <Route path="/gallery" exact component={() => Gallery(isEngContent)} />

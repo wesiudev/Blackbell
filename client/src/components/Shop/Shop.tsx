@@ -1,21 +1,26 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../common/redux/actions/categories";
+import { fetchProducts } from "../../common/redux/actions/product";
 import { ICategory, Image, IProduct } from "../../common/types/types";
 
 const Shop = () => {
   const dispatch: any = useDispatch();
 
   const { categories } = useSelector((state: any) => state.categories);
+  const { products } = useSelector((state: any) => state.products);
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(fetchProducts());
   }, []);
 
   const singleItemFromTheShopCount = categories?.data?.map(
     (item: ICategory) => ({
       categoryName: item.categoryName,
+      categoryItems: products.filter((product:any) => product.categ)
     })
   );
+  console.log(singleItemFromTheShopCount)
   const allItemsFromTheShopCount = singleItemFromTheShopCount?.reduce(
     (
       accumulator: number,

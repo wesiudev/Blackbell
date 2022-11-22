@@ -2,6 +2,9 @@
 export const AUTH = "AUTH"
 export const LOGOUT = "LOGOUT"
 
+//ownerauth
+export const OWNER_AUTH = "OWNER_AUTH"
+
 //errors
 export const GET_MESSAGES = "GET_MESSAGES"
 export const CLEAR_MESSAGES = "CLEAR_MESSAGES"
