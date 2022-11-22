@@ -16,6 +16,7 @@ import EditSubCategories from "./elements/edit/EditSubCategories";
 import ActionButtons from "./elements/ActionButtons";
 import ImagePreview from "./elements/edit/ImagePreview";
 import ImageUpload from "./elements/edit/ImageUpload";
+import ArrayColors from "./elements/display/ArrayColors";
 
 type EditorProps = {
   item: IProduct;
@@ -36,6 +37,7 @@ const ProductEditor = (props: EditorProps) => {
   const [isInputVisible, setInputVisibility] = useState<boolean>(false);
   const [subCategoryToAdd, setSubCategoryToAdd] = useState<string>("");
   const [itemSizes, setItemSizes] = useState<string>();
+  const [isEditArrayOpened, setEditArrayOpened] = useState<boolean>(false);
   const [deleteInsurance, setDeleteInsurance] = useState<boolean>(false);
   const [isDefaultAttributeMenu, setDefaultAttributeMenu] =
     useState<boolean>(false);
@@ -126,9 +128,28 @@ const ProductEditor = (props: EditorProps) => {
     setCurrentInputValue(imageIndex);
   }
 
+  function deleteColor(id: string){
+    setCurrentInputValue(id);
+    setAttributeToChange("deleteColor");
+  }
+
   return (
     <div className="editor">
       <div className="editor__content">
+      {isEditArrayOpened ? (
+          <div className="inputMenu">
+            <div className="inputMenu__content">
+              <ImageUpload
+                uploadHandler={handleProductEditation}
+                quitInput={quitInput}
+                currentImage={currentImagePreview}
+                setCurrentImage={setCurrentImagePreview}
+                setCurrentInputValue={setCurrentInputValue}
+                setRealImageSource={setRealImageSource}
+              />
+            </div>
+          </div>
+        ) : null}
         {isImageUploadOpened && attributeToChange === "itemImages" ? (
           <div className="inputMenu">
             <div className="inputMenu__content">
@@ -231,18 +252,20 @@ const ProductEditor = (props: EditorProps) => {
             name="itemQuantity"
             headline="Ilość"
           />
-          <RegularItem
+          {/* <RegularItem
             data={props.item.itemSize}
             setActionType={setActionType}
             label="Dodaj rozmiary"
             name="itemSize"
             headline="Rozmiary"
-          />
-          <RegularItem
+          /> */}
+          <ArrayColors
             data={props.item.itemColor}
             setActionType={setActionType}
+            deleteColor={deleteColor}
+            editProduct={handleProductEditation}
             label="Dodaj kolory"
-            name="itemColor"
+            name="addColor"
             headline="Kolory"
           />
           <RegularItem

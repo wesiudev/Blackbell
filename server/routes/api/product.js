@@ -197,6 +197,17 @@ router.post("/editProduct", async (req, res) => {
         { new: true }
       );
     }
+    if (actionType === "deleteColor") {
+      updatedProduct = await Product.findByIdAndUpdate(
+        {
+          _id: productId,
+        },
+        {
+          $pull: { itemColor: { _id: userInput } },
+        },
+        { new: true }
+      );
+    }
     if (actionType === "deleteImage") {
       updatedProduct = await Product.findByIdAndUpdate(
         {

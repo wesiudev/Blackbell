@@ -28,13 +28,13 @@ const ImagesItem = (props: IFeedItem) => {
         {!props?.data?.length ? (
           "Brak zdjęć produktu."
         ) : (
-          <div className="imagesMap">
+          <div className="map">
             {props?.data?.map((image: Image) => (
               <div
                 onClick={() =>
                   props.openImagePreview(image.thumbnail, image._id)
                 }
-                className="imagesMap__item"
+                className="map__item"
               >
                 <img src={image.thumbnail} alt="" />
               </div>

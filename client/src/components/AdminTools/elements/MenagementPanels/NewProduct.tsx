@@ -64,8 +64,8 @@ export const NewProduct = () => {
       itemPrice,
       itemDescription,
       itemQuantity,
-      arrayOfSizes,
-      arrayOfColors,
+      itemSize: arrayOfSizes,
+      itemColor: arrayOfColors,
       itemImages,
     }
     dispatch(addProduct(req));
