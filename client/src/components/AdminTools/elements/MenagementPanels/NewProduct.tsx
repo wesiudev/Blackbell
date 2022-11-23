@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import FileBase from "react-file-base64";
-import Input from "../input";
 import Select from "../SelectInput/select";
 import { getCategories } from '../../../../common/redux/actions/categories'
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../../../common/redux/actions/product";
 import Resizer from "react-image-file-resizer";
-import { storage } from '../../../../common/firebase/firebase'
 import { getStorage, ref, uploadBytes, deleteObject } from "firebase/storage"
 import MiniLoader from "../productEditor/elements/itemLoader/miniLoader";
 

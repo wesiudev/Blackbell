@@ -8,9 +8,15 @@ interface IFeedItem {
   headline: string;
   openImagePreview: Function;
   setImageUploadOpened: Function;
+  setRealImageSource: Function
 }
 
 const ImagesItem = (props: IFeedItem) => {
+  
+  function openPreview(thumbnail: string, id: string, realPicture: string) {
+    props.openImagePreview(thumbnail, id)
+    props.setRealImageSource(realPicture)
+  }
   return (
     <div className="feedItem">
       <div className="feedItem__headline">
@@ -33,7 +39,7 @@ const ImagesItem = (props: IFeedItem) => {
               <div
               key={image._id}
                 onClick={() =>
-                  props.openImagePreview(image.thumbnail, image._id)
+                  openPreview(image.thumbnail, image._id, image.realPicture)
                 }
                 className="map__item"
               >

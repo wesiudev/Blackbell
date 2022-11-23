@@ -18,7 +18,6 @@ import ImagePreview from "./elements/edit/ImagePreview";
 import ImageUpload from "./elements/edit/ImageUpload";
 import ArrayColors from "./elements/display/ArrayColors";
 import ArraySizes from "./elements/display/ArraySizes";
-import EditArray from "./elements/edit/EditArray";
 
 type EditorProps = {
   item: IProduct;
@@ -48,14 +47,13 @@ const ProductEditor = (props: EditorProps) => {
   const [currentImagePreview, setCurrentImagePreview] = useState<string>("");
   const [realImageSource, setRealImageSource] = useState<string>("");
   const [isImageUploadOpened, setImageUploadOpened] = useState<boolean>(false);
-
   function handleProductEditation() {
     const req = {
       productId: props?.item?._id,
       userInput: currentInputValue,
       actionType: attributeToChange,
       thumbnail: currentInputValue,
-      realImage: realImageSource,
+      realPicture: `image-${realImageSource}`,
     };
     dispatch(editProduct(req));
     setInputVisibility(false);
@@ -213,6 +211,8 @@ const ProductEditor = (props: EditorProps) => {
                 deleteHandler={handleProductEditation}
                 quitInput={quitInput}
                 currentImage={currentImagePreview}
+                realImageSource={realImageSource}
+                setRealImageSource={setRealImageSource}
               />
             </div>
           </div>
@@ -334,6 +334,7 @@ const ProductEditor = (props: EditorProps) => {
             headline="Zdjęcia"
             openImagePreview={openImagePreviewModal}
             setImageUploadOpened={setImageUploadOpened}
+            setRealImageSource={setRealImageSource}
           />
           <div style={{ marginTop: "55px" }}>
             {!deleteInsurance ? (
