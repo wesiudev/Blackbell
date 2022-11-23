@@ -2,33 +2,55 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../common/redux/actions/categories";
 import { fetchProducts } from "../../common/redux/actions/product";
-import { ICategory, Image, IProduct } from "../../common/types/types";
+import { getSubCategories } from "../../common/redux/actions/subCategories";
+import {
+  ICategory,
+  Image,
+  IProduct,
+  ISubCategory,
+} from "../../common/types/types";
 
 const Shop = () => {
   const dispatch: any = useDispatch();
 
   const { categories } = useSelector((state: any) => state.categories);
+  const { subCategories } = useSelector((state: any) => state.subCategories);
   const { products } = useSelector((state: any) => state.products);
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getSubCategories());
     dispatch(fetchProducts());
   }, []);
 
-  const singleItemFromTheShopCount = categories?.data?.map(
-    (item: ICategory) => ({
-      categoryName: item.categoryName,
-      categoryItems: products.filter((product:any) => product.categ)
-    })
-  );
-  console.log(singleItemFromTheShopCount)
-  const allItemsFromTheShopCount = singleItemFromTheShopCount?.reduce(
-    (
-      accumulator: number,
-      current: { categoryName: string; numberOfItems: number }
-    ) => accumulator + current.numberOfItems,
-    0
-  );
-  console.log(allItemsFromTheShopCount);
+  const array = {
+    categories: categories?.data?.map((category: ICategory) => ({
+      categoryName: category.categoryName,
+      products: products?.data?.filter(
+        (product: IProduct) =>
+          product.itemCategoryName === category.categoryName
+      ),
+      subCategories: category.subCategories.map(
+        (subCategory: ISubCategory) => ({
+          subCategoryName: subCategory.subCategoryName,
+          products: products?.data?.filter(
+            (product: IProduct) =>
+              product.subCategory === subCategory.subCategoryName
+          ),
+        })
+      ),
+    })),
+  };
+  const navMenuContent = array?.categories?.map((array: any) => ({
+    category: array.categoryName,
+    categoryLength: array.products.length,
+    subCategories: array.subCategories.map((item: any) => ({
+      subCategoryItems: item,
+      subCategoryLength: item.products.length
+    }))
+
+  }));
+  console.log(array)
+  console.log(navMenuContent)
   return (
     <div className="shop">
       {/* <div className="shop__search">
