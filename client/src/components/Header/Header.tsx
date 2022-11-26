@@ -8,7 +8,7 @@ import instagramWhiteIcon from '../../common/images/instagramWhite.png'
 import youtubeWhiteIcon from '../../common/images/youtubeWhite.png'
 import {useState, useEffect} from 'react'
 import useWindowDimensions from '../../common/hooks/useWindowDimensions'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 type header = {
     setEngContent: Function
@@ -34,21 +34,21 @@ const Header = (props: header) => {
         <>
             <header>
                 <div className="content">
-                    <Link className="logo" to="/">
+                    <NavLink className="logo" to="/">
                             <img src={isMenuOpen ? logoWhite : logo} alt="" /><span style={isMenuOpen ? {color:'white'} : {color:'black'}}>BlackBell</span>
-                    </Link>
+                    </NavLink>
                     { width < 1023 ? <div className="open" onClick={() => setMenuOpen(!isMenuOpen)}><span></span><span></span><span></span></div> : null }
                     <div className={handleNavVisibility()}>
                         <div className="nav__items">
-                            <Link to="/gallery" className="nav__items__item">
+                            <NavLink to="/gallery" className="nav__items__item">
                                 {props.isEngContent ? 'GALLERY' : 'GALERIA'}
-                            </Link>
-                            <Link to="/shop" className="nav__items__item">
+                            </NavLink>
+                            <NavLink to="/shop" className="nav__items__item">
                                 {props.isEngContent ? 'SHOP' : 'SKLEP'}
-                            </Link>
-                            <Link to="/contact" className="nav__items__item">
+                            </NavLink>
+                            <NavLink to="/contact" className="nav__items__item">
                                 {props.isEngContent ? 'CONTACT' : 'KONTAKT'}
-                            </Link>
+                            </NavLink>
                         </div>
                         <div className="nav__socials">
                             <div className="nav__socials__items">

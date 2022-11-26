@@ -20,9 +20,11 @@ export interface IProduct {
   export interface ISubCategory {
     subCategoryName: string
     relatedCategoryName: string
+    _id: string
   }
   export interface ICategory {
     categoryName: string 
+    _id: string 
     subCategories: ISubCategory[]
   }
 
