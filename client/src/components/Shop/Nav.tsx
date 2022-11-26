@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 interface INav {
   navOffsetRight:any
@@ -13,7 +13,13 @@ const Nav = (props: INav) => {
     props;
 
   const navContentWidth = useRef<any>();
-  const navWidth = navContentWidth?.current?.offsetWidth;
+  const [navWidth, setNavWidth] = useState<number>(navContentWidth?.current?.offsetWidth);
+    useEffect(() => {
+      setTimeout(() => {
+        
+        setNavWidth(navContentWidth?.current?.offsetWidth)
+      }, 1000);
+    }, [navContentWidth])
   return (
     <div
       style={navContentWidth ? { width:`${navWidth}px` } : {}}

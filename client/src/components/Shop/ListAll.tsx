@@ -1,16 +1,15 @@
 import { IProduct } from "../../common/types/types";
 
 interface ListAll {
-  getOffsetLeft: any
   products: IProduct[];
 }
 
 const ListAll = (props: ListAll) => {
-  const { products, getOffsetLeft } = props;
+  const { products } = props;
 
   return (
     <>
-      <div ref={getOffsetLeft} className="category__title">
+      <div  className="category__title">
         <h1>Wszystkie produkty</h1>
       </div>
       <div className="category__items">

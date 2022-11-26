@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.URL || "https://blackbellart.herokuapp.com/";
+const url = process.env.URL || "https://blackbellart.herokuapp.com/shop";
 
 const API = axios.create({ baseURL: url });
 

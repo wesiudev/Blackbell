@@ -1282,16 +1282,11 @@ header .content .open span {
 @media screen and (max-width: 1024px) {
   .shop__feed {
     margin: 90px auto;
-    width: 90%;
+    width: 95%;
   }
 }
 .shop__feed .category {
   width: 100%;
-}
-@media screen and (max-width: 766px) {
-  .shop__feed .category {
-    font-size: 22px;
-  }
 }
 .shop__feed .category__title {
   height: 50px;
@@ -1366,6 +1361,12 @@ header .content .open span {
 }
 .shop__feed .category__items__item .underImage .topSide span {
   font-weight: 600;
+  font-size: 20px;
+}
+@media screen and (max-width: 1023px) {
+  .shop__feed .category__items__item .underImage .topSide span {
+    font-size: 26px;
+  }
 }
 .shop__feed .category__items__item .underImage .desc {
   font-weight: 600;

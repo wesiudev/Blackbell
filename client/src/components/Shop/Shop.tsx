@@ -64,28 +64,27 @@ const Shop = () => {
   }));
 
   //design
-  const categoriesOffsetLeft = useRef<HTMLDivElement>(null)
+  const feedOffsetLeft = useRef<HTMLDivElement>(null)
   
   const [navOffsetRight, setNavOffsetRight] = useState<any>();
 
   window.addEventListener("resize", (event) => {
-    setNavOffsetRight(categoriesOffsetLeft.current?.offsetLeft!)
+    setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!)
   });
+  
     useEffect(() => {
-      setNavOffsetRight(categoriesOffsetLeft.current?.offsetLeft!) 
+      setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!) 
     }, [])
-
   return (
     <div className="shop">
       
-      <div className="shop__feed">
+      <div ref={feedOffsetLeft} className="shop__feed">
         {currentCategory === "listAll" ? (
-          <ListAll getOffsetLeft={categoriesOffsetLeft} products={products?.data} />
+          <ListAll products={products?.data} />
         ) : (
           <div>
 
           <ListSingleCategory
-          getOffsetLeft={categoriesOffsetLeft}
           shopData={shopData?.content}
           currentCategory={currentCategory}
           />
@@ -93,7 +92,7 @@ const Shop = () => {
         )}
       </div>
       <Nav
-        navOffsetRight={navOffsetRight}
+        navOffsetRight={navOffsetRight ? navOffsetRight : null}
         navMenuContent={navMenuContent}
         itemCount={products?.data?.length}
         setCurrentCategory={setCurrentCategory}

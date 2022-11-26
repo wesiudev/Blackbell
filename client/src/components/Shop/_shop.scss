@@ -91,13 +91,10 @@
         width:100%;
         @media screen and (max-width:1024px) {
             margin:90px auto;
-            width:90%;
+            width:95%;
         }
         .category{
             width:100%;
-            @media screen and (max-width:766px) {
-                font-size: 22px;
-            } 
             &__title{
                 height:50px;
                 @media screen and (max-width:1024px) {
@@ -152,6 +149,10 @@
                             width:100%;
                             span{
                                 font-weight: 600;
+                                @media screen and (max-width:1023px) { 
+                                    font-size: 26px;
+                                }
+                                font-size: 20px;
                             }
                         }
                         .desc{

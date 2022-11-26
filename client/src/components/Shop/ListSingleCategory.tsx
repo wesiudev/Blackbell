@@ -2,13 +2,12 @@ import React from "react";
 import { IProduct } from "../../common/types/types";
 
 interface ISingleCategory {
-  getOffsetLeft: any
   shopData: any[];
   currentCategory: string;
 }
 
 const ListSingleCategory = (props: ISingleCategory) => {
-  const { shopData, currentCategory, getOffsetLeft } = props;
+  const { shopData, currentCategory } = props;
 
   return (
     <>
@@ -17,7 +16,7 @@ const ListSingleCategory = (props: ISingleCategory) => {
           <>
             {category.categoryName === currentCategory && (
               <>
-                <div ref={getOffsetLeft} className="category__title">
+                <div className="category__title">
                   <h1>{category.categoryName}</h1>
                 </div>
                 <div className="category__items">
