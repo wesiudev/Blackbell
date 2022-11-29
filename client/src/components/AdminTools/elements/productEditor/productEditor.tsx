@@ -30,7 +30,7 @@ const ProductEditor = (props: EditorProps) => {
   const dispatch = useDispatch<any>();
   const { subCategories } = useSelector((state: any) => state.subCategories);
   const fetchingProduct = useSelector(
-    (state: any) => state.products.fetchingSingleProduct
+    (state: any) => state.products.fetching
   );
   const [currentInputValue, setCurrentInputValue] = useState<any>();
   const [inputLabel, setInputLabel] = useState<string>("");

@@ -13,15 +13,12 @@ const Nav = (props: INav) => {
     props;
 
   const navContentWidth = useRef<any>();
-  const [navWidth, setNavWidth] = useState<number>(navContentWidth?.current?.offsetWidth);
+  const [navWidth, setNavWidth] = useState<number>(0);
     useEffect(() => {
-      setTimeout(() => {
-        
-        setNavWidth(navContentWidth?.current?.offsetWidth)
-      }, 1000);
-    }, [navContentWidth])
-  return (
-    <div
+      setNavWidth(navContentWidth?.current?.offsetWidth)
+    }, [])
+     return (
+      <div
       style={navContentWidth ? { width:`${navWidth}px` } : {}}
       className="shop__nav"
     >

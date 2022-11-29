@@ -6,13 +6,12 @@ import Shop from "./components/Shop/Shop";
 import Gallery from "./components/Gallery/Gallery";
 import Admin from "./components/Admin/Admin";
 import { ParallaxProvider } from 'react-scroll-parallax';
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import Loader from "./components/Loader/Loader";
 import './styles/index.css'
 import Footer from "./components/Footer/Footer";
 
 export default function App(){
-
 
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
 

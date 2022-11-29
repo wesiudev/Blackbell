@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../common/redux/actions/categories";
 import { fetchProducts } from "../../common/redux/actions/product";
 import { getSubCategories } from "../../common/redux/actions/subCategories";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   ICategory,
   Image,
@@ -12,6 +13,17 @@ import {
 import ListAll from "./ListAll";
 import ListSingleCategory from "./ListSingleCategory";
 import Nav from "./Nav";
+import NavLoading from "./NavLoading";
+import ShopLoading from "./ShopLoading";
+import ItemLoader from "../AdminTools/elements/productEditor/elements/itemLoader/itemLoader";
+import FullHDPreview from "./FullHDPreview";
+
+interface ImagePreview {
+  isOpen: boolean;
+  thumbnail: string;
+  fullHD: string;
+  isLoading: boolean;
+}
 
 const Shop = () => {
   //data display / modification
@@ -21,11 +33,7 @@ const Shop = () => {
   const { categories } = useSelector((state: any) => state.categories);
   const { subCategories } = useSelector((state: any) => state.subCategories);
   const { products } = useSelector((state: any) => state.products);
-  useEffect(() => {
-    dispatch(getCategories());
-    dispatch(getSubCategories());
-    dispatch(fetchProducts());
-  }, []);
+  const isFetching = useSelector((state: any) => state.products.fetching);
 
   const shopData = {
     content: categories?.data?.map((category: ICategory) => ({
@@ -56,48 +64,105 @@ const Shop = () => {
     })),
   }));
 
-  const arrayOfImages = products?.data?.map((product: IProduct) => ({
+  const arrayOfPrimaryImages = products?.data?.map((product: IProduct) => ({
     productId: product._id,
     image: product?.itemImages.filter(
       (image: Image) => image._id === product.primaryImage
     ),
   }));
+  useEffect(() => {
+    !categories?.data?.length && dispatch(getCategories());
+    !subCategories?.data?.length && dispatch(getSubCategories());
+    !products?.data?.length && dispatch(fetchProducts());
+  }, []);
 
   //design
-  const feedOffsetLeft = useRef<HTMLDivElement>(null)
-  
-  const [navOffsetRight, setNavOffsetRight] = useState<any>();
+  const feedOffsetLeft = useRef<HTMLDivElement>(null);
 
-  window.addEventListener("resize", (event) => {
-    setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!)
+  const [navOffsetRight, setNavOffsetRight] = useState<any>();
+  const [downloadedImg, setDownloadedImg] = useState<ImagePreview>({
+    isOpen: false,
+    thumbnail: "",
+    fullHD: "",
+    isLoading: false,
   });
-  
-    useEffect(() => {
-      setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!) 
-    }, [])
+  function downloadImage(source: Image) {
+    setDownloadedImg({
+      ...downloadedImg,
+      thumbnail: source.thumbnail,
+      isLoading: true,
+      isOpen: true,
+    });
+    const storage = getStorage();
+    const imageRef = ref(storage, `images/${source.realPicture}`);
+    getDownloadURL(imageRef).then((url) => {
+      setDownloadedImg({
+        ...downloadedImg,
+        fullHD: url,
+        thumbnail: "primary loaded",
+        isLoading: false,
+        isOpen: true,
+      });
+    });
+  }
+  window.addEventListener("resize", () => {
+    setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!);
+  });
+
+  useEffect(() => {
+    setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!);
+  }, []);
   return (
     <div className="shop">
-      
-      <div ref={feedOffsetLeft} className="shop__feed">
-        {currentCategory === "listAll" ? (
-          <ListAll products={products?.data} />
-        ) : (
-          <div>
-
-          <ListSingleCategory
-          shopData={shopData?.content}
-          currentCategory={currentCategory}
-          />
+      {downloadedImg.isOpen && (
+        <>
+          <div className="fullHDPreview">
+            {downloadedImg.isLoading && <ItemLoader loaderStyle="fixed" />}
+            <FullHDPreview
+              previewSrc={
+                downloadedImg.fullHD
+                  ? downloadedImg.fullHD
+                  : downloadedImg.thumbnail
+              }
+              setDownloadedImg={setDownloadedImg}
+            />
           </div>
+        </>
+      )}
+
+      <div ref={feedOffsetLeft} className="shop__feed">
+        {isFetching ? (
+          <ShopLoading />
+        ) : (
+          <>
+            {currentCategory === "listAll" ? (
+              <ListAll
+                products={products?.data}
+                downloadImage={downloadImage}
+              />
+            ) : (
+              <div>
+                <ListSingleCategory
+                  shopData={shopData?.content}
+                  currentCategory={currentCategory}
+                  downloadImage={downloadImage}
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
-      <Nav
-        navOffsetRight={navOffsetRight ? navOffsetRight : null}
-        navMenuContent={navMenuContent}
-        itemCount={products?.data?.length}
-        setCurrentCategory={setCurrentCategory}
-        currentCategory={currentCategory}
-      />
+      {isFetching ? (
+        <NavLoading />
+      ) : (
+        <Nav
+          navOffsetRight={navOffsetRight ? navOffsetRight : null}
+          navMenuContent={navMenuContent}
+          itemCount={products?.data?.length}
+          setCurrentCategory={setCurrentCategory}
+          currentCategory={currentCategory}
+        />
+      )}
     </div>
   );
 };

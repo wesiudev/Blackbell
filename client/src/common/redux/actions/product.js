@@ -5,8 +5,8 @@ import {
   REMOVE_PRODUCT,
   EDIT_PRODUCT,
   CLEAN_PRODUCT,
-  FETCHING_SINGLE_PRODUCT,
-  END_FETCHING_SINGLE_PRODUCT,
+  START_LOADING,
+  STOP_LOADING,
 } from "./actionTypes";
 import * as api from "../api";
 import { clearMessages, getMessages } from "./messages";
@@ -41,10 +41,10 @@ export const deleteProduct = (req) => async (dispatch) => {
 
 export const editProduct = (req) => async (dispatch) => {
   try {
-    dispatch({ type: FETCHING_SINGLE_PRODUCT });
+    dispatch({ type: START_LOADING });
     const { data } = await api.editProduct(req);
     dispatch({ type: EDIT_PRODUCT, data });
-    dispatch({ type: END_FETCHING_SINGLE_PRODUCT });
+    dispatch({ type: STOP_LOADING });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {
@@ -55,8 +55,10 @@ export const editProduct = (req) => async (dispatch) => {
 
 export const fetchProducts = (req) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.fetchProducts(req);
     dispatch({ type: FETCH_PRODUCTS, data });
+    dispatch({ type: STOP_LOADING });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {
@@ -66,10 +68,10 @@ export const fetchProducts = (req) => async (dispatch) => {
 };
 export const fetchProduct = (req) => async (dispatch) => {
   try {
-    dispatch({ type: FETCHING_SINGLE_PRODUCT });
+    dispatch({ type: START_LOADING });
     const { data } = await api.fetchProduct(req);
     dispatch({ type: FETCH_PRODUCT, data });
-    dispatch({ type: END_FETCHING_SINGLE_PRODUCT });
+    dispatch({ type: STOP_LOADING });
   } catch (error) {
     dispatch(getMessages(error.response.data.msg, "ERROR"));
     setTimeout(() => {

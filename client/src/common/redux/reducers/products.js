@@ -5,14 +5,14 @@ import {
   FETCH_PRODUCTS,
   REMOVE_PRODUCT,
   CLEAN_PRODUCT,
-  FETCHING_SINGLE_PRODUCT,
-  END_FETCHING_SINGLE_PRODUCT,
+  START_LOADING,
+  STOP_LOADING,
 } from "../actions/actionTypes";
 
 const initialState = {
   products: [],
   product: {},
-  fetchingSingleProduct: false,
+  fetching: false,
 };
 
 const productReducer = (state = initialState, action) => {
@@ -39,15 +39,15 @@ const productReducer = (state = initialState, action) => {
         ...state,
         product: {},
       };
-    case FETCHING_SINGLE_PRODUCT:
+    case START_LOADING:
       return {
         ...state,
-        fetchingSingleProduct: true,
+        fetching: true,
       };
-    case END_FETCHING_SINGLE_PRODUCT:
+    case STOP_LOADING:
       return {
         ...state,
-        fetchingSingleProduct: false,
+        fetching: false,
       };
     default:
       return state;

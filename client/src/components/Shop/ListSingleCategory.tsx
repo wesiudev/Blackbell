@@ -1,13 +1,16 @@
 import React from "react";
-import { IProduct } from "../../common/types/types";
+import { Image, IProduct } from "../../common/types/types";
+import cart from "../../common/images/cart.png";
+import preview from "../../common/images/hd.png";
 
 interface ISingleCategory {
   shopData: any[];
   currentCategory: string;
+  downloadImage: Function;
 }
 
 const ListSingleCategory = (props: ISingleCategory) => {
-  const { shopData, currentCategory } = props;
+  const { shopData, currentCategory, downloadImage } = props;
 
   return (
     <>
@@ -25,7 +28,32 @@ const ListSingleCategory = (props: ISingleCategory) => {
                       {item.itemImages.map((image: any) => (
                         <>
                           {image._id === item.primaryImage ? (
-                            <img src={image.thumbnail} alt="" />
+                            <div className="image">
+                              <div className="image__open">
+                                <div
+                                  onClick={() =>
+                                    downloadImage(
+                                      item?.itemImages.find(
+                                        (image: Image) =>
+                                          image._id === item.primaryImage
+                                      )
+                                    )
+                                  }
+                                  className="image__open__box"
+                                  style={{ marginRight: "0px" }}
+                                >
+                                  <img id="cart" src={preview} alt="" />
+                                </div>
+                                <div className="image__open__box">
+                                  <img id="cart" src={cart} alt="" />
+                                </div>
+                              </div>
+                              <img
+                                id="thumbnail"
+                                src={image.thumbnail}
+                                alt=""
+                              />
+                            </div>
                           ) : null}
                         </>
                       ))}
