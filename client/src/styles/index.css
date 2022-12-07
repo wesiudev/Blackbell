@@ -1535,7 +1535,7 @@ header .content .open span {
 .singleProduct {
   width: 70%;
   min-height: 100vh;
-  margin: 0px auto 0px auto;
+  margin: 160px auto 120px auto;
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px) {
   .singleProduct {
@@ -1544,77 +1544,134 @@ header .content .open span {
 }
 @media screen and (max-width: 1023px) {
   .singleProduct {
-    width: 95vw;
+    width: 90vw;
   }
 }
 .singleProduct__content {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
   width: 100%;
-  position: relative;
-  min-height: 100vh;
+  display: flex;
+}
+@media screen and (max-width: 1023px) {
+  .singleProduct__content {
+    flex-direction: column-reverse;
+    min-height: 100vh;
+    justify-content: space-around;
+    width: 90vw;
+  }
 }
 .singleProduct__content .gallery {
-  height: 65vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgba(56, 56, 56, 0.6);
+  box-shadow: 0px 0px 6px black;
   position: relative;
+  height: 75vh;
 }
-.singleProduct__content .gallery .image {
-  height: 100%;
+@media screen and (max-width: 1023px) {
+  .singleProduct__content .gallery {
+    width: 100%;
+    height: 90vh;
+  }
+}
+.singleProduct__content .gallery .slider {
   width: 100%;
+  height: 100%;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
-.singleProduct__content .gallery .image__content {
+.singleProduct__content .gallery .slider-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+}
+.singleProduct__content .gallery .slider-item {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+.singleProduct__content .gallery .slider-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.singleProduct__content .gallery .slider-button {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+.singleProduct__content .gallery .slider-button-previous {
   left: 0;
-  top: 0;
-  height: 100%;
+}
+.singleProduct__content .gallery .slider-button-next {
+  right: 0;
+}
+.singleProduct__content .gallery .slider-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.singleProduct__content .gallery .image__content img {
-  height: 100%;
-  box-shadow: 0px 0px 10px black;
-}
-.singleProduct__content .gallery .image__tools {
+  height: 80px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 75px;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  background-color: rgba(56, 56, 56, 0.6);
+  padding: 5px 0;
 }
-.singleProduct__content .gallery .image__tools .tools {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  border-radius: 5px;
+.singleProduct__content .gallery .slider-dot {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  height: 100%;
   padding: 10px;
+  margin: 0;
 }
-.singleProduct__content .gallery .image__tools .tools .thumbnail {
-  padding: 5px;
+.singleProduct__content .gallery .slider-dot img {
+  cursor: pointer;
   height: 100%;
+  border: 1px solid transparent;
 }
-.singleProduct__content .gallery .image__tools .tools .thumbnail img {
-  height: 100%;
+.singleProduct__content .gallery .slider-dot .active {
+  border: 1px solid black;
+  box-shadow: 0px 0px 6px white;
 }
-.singleProduct__content .gallery .image__tools .tools .active {
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.5019607843);
+.singleProduct .productInfo {
+  width: 100%;
 }
-.singleProduct__content .productInfo {
-  width: 50%;
-  background-color: aqua;
+.singleProduct .productInfo h2 {
+  width: 80%;
+  margin: 55px auto;
+  text-align: left;
+}
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .singleProduct .productInfo h2 {
+    text-align: center;
+    width: 80%;
+  }
+}
+@media screen and (max-width: 766px) {
+  .singleProduct .productInfo h2 {
+    text-align: center;
+    width: 100%;
+  }
 }
 
 .select {
