@@ -37,7 +37,7 @@ const ProductEditor = (props: EditorProps) => {
   const [attributeToChange, setAttributeToChange] = useState<string>("");
   const [isInputVisible, setInputVisibility] = useState<boolean>(false);
   const [subCategoryToAdd, setSubCategoryToAdd] = useState<string>("");
-  const [itemSizes, setItemSizes] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<string>();
   const [isEditArrayOpened, setEditArrayOpened] = useState<boolean>(false);
   const [deleteInsurance, setDeleteInsurance] = useState<boolean>(false);
   const [isDefaultAttributeMenu, setDefaultAttributeMenu] =
@@ -53,7 +53,8 @@ const ProductEditor = (props: EditorProps) => {
       userInput: currentInputValue,
       actionType: attributeToChange,
       thumbnail: currentInputValue,
-      realPicture: `image-${realImageSource}`,
+      imageName: `image-${realImageSource}`,
+      imageUrl: imageUrl
     };
     dispatch(editProduct(req));
     setInputVisibility(false);
@@ -180,16 +181,6 @@ const ProductEditor = (props: EditorProps) => {
             </div>
           </div>
         ) : null}
-        {isEditArrayOpened ? (
-          <ImageUpload
-            uploadHandler={handleProductEditation}
-            quitInput={quitInput}
-            currentImage={currentImagePreview}
-            setCurrentImage={setCurrentImagePreview}
-            setCurrentInputValue={setCurrentInputValue}
-            setRealImageSource={setRealImageSource}
-          />
-        ) : null}
         {isImageUploadOpened && attributeToChange === "itemImages" ? (
           <div className="inputMenu">
             <div className="inputMenu__content">
@@ -200,6 +191,7 @@ const ProductEditor = (props: EditorProps) => {
                 setCurrentImage={setCurrentImagePreview}
                 setCurrentInputValue={setCurrentInputValue}
                 setRealImageSource={setRealImageSource}
+                setImageUrl={setImageUrl}
               />
             </div>
           </div>

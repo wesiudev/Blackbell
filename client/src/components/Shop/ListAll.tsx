@@ -4,10 +4,11 @@ import preview from "../../common/images/hd.png";
 interface ListAll {
   products: IProduct[];
   downloadImage: Function;
+  setQuery: Function;
 }
 
 const ListAll = (props: ListAll) => {
-  const { products, downloadImage } = props;
+  const { products, downloadImage, setQuery } = props;
 
   return (
     <>
@@ -16,26 +17,34 @@ const ListAll = (props: ListAll) => {
       </div>
       <div className="category__items">
         {products?.map((item: IProduct, idx: number) => (
-          <div key={idx} className="category__items__item">
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              setQuery(item._id);
+            }}
+            key={idx}
+            className="category__items__item"
+          >
             {item.itemImages.map((image: any) => (
               <>
                 {image._id === item.primaryImage ? (
                   <div className="image">
                     <div className="image__open">
                       <div
-                        onClick={() =>
+                        onClick={(e) => {
+                          e.stopPropagation();
                           downloadImage(
                             item?.itemImages.find(
                               (image: Image) => image._id === item.primaryImage
                             )
-                          )
-                        }
-                        className="image__open__box"
+                          );
+                        }}
+                        className="image__open__tool"
                         style={{ marginRight: "0px" }}
                       >
                         <img id="cart" src={preview} alt="" />
                       </div>
-                      <div className="image__open__box">
+                      <div className="image__open__tool">
                         <img id="cart" src={cart} alt="" />
                       </div>
                     </div>

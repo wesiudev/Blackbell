@@ -4,6 +4,7 @@ import { getCategories } from "../../common/redux/actions/categories";
 import { fetchProducts } from "../../common/redux/actions/product";
 import { getSubCategories } from "../../common/redux/actions/subCategories";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import {
   ICategory,
   Image,
@@ -76,9 +77,19 @@ const Shop = () => {
     !products?.data?.length && dispatch(fetchProducts());
   }, []);
 
+  //query
+  const navigate = useNavigate();
+  function setQuery(id: string) {
+    navigate({
+      pathname: "single product",
+      search: `?${createSearchParams({
+        id: id,
+      })}`,
+    });
+  }
   //design
   const feedOffsetLeft = useRef<HTMLDivElement>(null);
-
+  
   const [navOffsetRight, setNavOffsetRight] = useState<any>();
   const [downloadedImg, setDownloadedImg] = useState<ImagePreview>({
     isOpen: false,
@@ -87,14 +98,15 @@ const Shop = () => {
     isLoading: false,
   });
   function downloadImage(source: Image) {
+    const storage = getStorage();
+    console.log("download");
     setDownloadedImg({
       ...downloadedImg,
       thumbnail: source.thumbnail,
       isLoading: true,
       isOpen: true,
     });
-    const storage = getStorage();
-    const imageRef = ref(storage, `images/${source.realPicture}`);
+    const imageRef = ref(storage, `images/${source.imageName}`);
     getDownloadURL(imageRef).then((url) => {
       setDownloadedImg({
         ...downloadedImg,
@@ -139,6 +151,7 @@ const Shop = () => {
               <ListAll
                 products={products?.data}
                 downloadImage={downloadImage}
+                setQuery={setQuery}
               />
             ) : (
               <div>
@@ -146,6 +159,7 @@ const Shop = () => {
                   shopData={shopData?.content}
                   currentCategory={currentCategory}
                   downloadImage={downloadImage}
+                  setQuery={setQuery}
                 />
               </div>
             )}

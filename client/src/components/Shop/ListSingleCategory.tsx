@@ -7,10 +7,11 @@ interface ISingleCategory {
   shopData: any[];
   currentCategory: string;
   downloadImage: Function;
+  setQuery: Function;
 }
 
 const ListSingleCategory = (props: ISingleCategory) => {
-  const { shopData, currentCategory, downloadImage } = props;
+  const { shopData, currentCategory, downloadImage, setQuery } = props;
 
   return (
     <>
@@ -24,27 +25,35 @@ const ListSingleCategory = (props: ISingleCategory) => {
                 </div>
                 <div className="category__items">
                   {category?.products?.map((item: IProduct, idx: number) => (
-                    <div key={idx} className="category__items__item">
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setQuery(item._id);
+                      }}
+                      key={idx}
+                      className="category__items__item"
+                    >
                       {item.itemImages.map((image: any) => (
                         <>
                           {image._id === item.primaryImage ? (
                             <div className="image">
                               <div className="image__open">
                                 <div
-                                  onClick={() =>
+                                  className="image__open__tool"
+                                  style={{ marginRight: "0px" }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
                                     downloadImage(
                                       item?.itemImages.find(
                                         (image: Image) =>
                                           image._id === item.primaryImage
                                       )
-                                    )
-                                  }
-                                  className="image__open__box"
-                                  style={{ marginRight: "0px" }}
+                                    );
+                                  }}
                                 >
                                   <img id="cart" src={preview} alt="" />
                                 </div>
-                                <div className="image__open__box">
+                                <div className="image__open__tool">
                                   <img id="cart" src={cart} alt="" />
                                 </div>
                               </div>

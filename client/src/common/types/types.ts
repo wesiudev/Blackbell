@@ -15,6 +15,8 @@ export interface IProduct {
   export type Image = {
     realPicture: string,
     thumbnail: string
+    imageName:string
+    imageUrl: string
     _id: string
   }
   export interface ISubCategory {
@@ -33,3 +35,11 @@ export interface IProduct {
     products: IProduct[]
     subCategories: ISubCategory[]
   }
+
+  export interface ImagePreview {
+    isOpen: boolean;
+    thumbnail: string;
+    fullHD: string;
+    isLoading: boolean;
+  }
+

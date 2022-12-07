@@ -10,6 +10,7 @@ import { useState, useLayoutEffect, useEffect } from "react";
 import Loader from "./components/Loader/Loader";
 import './styles/index.css'
 import Footer from "./components/Footer/Footer";
+import SingleProduct from "./components/Shop/SingleProduct";
 
 export default function App(){
 
@@ -33,6 +34,7 @@ export default function App(){
               <Route path="/shop" element={<Shop/>} />
               <Route path="/contact" element={<Contact/>} />
               <Route path="/admin" element={<Admin/>}/>
+              <Route path="/shop/:id" element={<SingleProduct/>}/>
             </Routes>
           </Wrapper>
         </BrowserRouter>

@@ -124,7 +124,7 @@ router.post("/moveProduct", async (req, res) => {
 
 router.post("/editProduct", async (req, res) => {
   try {
-    const { productId, userInput, actionType, thumbnail, realPicture } =
+    const { productId, userInput, actionType, thumbnail, imageUrl, imageName } =
       req.body;
     const itemToEdit = await Product.findById(productId);
     if (itemToEdit === null) throw Error(`Produkt ${productId} nie istnieje.`);
@@ -254,7 +254,8 @@ router.post("/editProduct", async (req, res) => {
           $push: {
             itemImages: {
               thumbnail: thumbnail,
-              realPicture: realPicture,
+              imageName: imageName,
+              imageUrl: imageUrl,
             },
           },
         },

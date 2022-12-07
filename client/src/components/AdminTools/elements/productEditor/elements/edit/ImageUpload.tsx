@@ -1,6 +1,6 @@
 import Resizer from "react-image-file-resizer";
 import { storage } from "../../../../../../common/firebase/firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
 import ItemLoader from "../itemLoader/itemLoader";
 
@@ -11,6 +11,7 @@ type PreviewProps = {
   setCurrentImage: Function;
   setCurrentInputValue: Function;
   setRealImageSource: Function;
+  setImageUrl:Function
 };
 const ImageUpload = (props: PreviewProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -56,12 +57,15 @@ const ImageUpload = (props: PreviewProps) => {
       //in pseudo randomness we trust 🙏
       const pseudoRandom = Math.floor(Math.random() * 9999 * 100).toString();
       const imageRef = ref(storage, `images/image-${pseudoRandom}`);
-      uploadBytes(imageRef, fireBaseImage).then(() => {
-        setIsLoading(false);
+      uploadBytes(imageRef, fireBaseImage).then(() =>
+        getDownloadURL(imageRef).then((url) => {
+          setIsLoading(false);
         props.setCurrentInputValue(mongoImage);
         props.setCurrentImage(mongoImage);
         props.setRealImageSource(pseudoRandom);
-      });
+        props.setImageUrl(url);
+        })
+      );
     } catch (err) {
       console.log(err);
     }
