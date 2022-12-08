@@ -86,7 +86,7 @@ const ProductEditor = (props: EditorProps) => {
     setImageUploadOpened(false);
     setCurrentImagePreview("");
     props.changesWereCommitted &&
-      dispatch(fetchProduct({ productId: props?.item?._id }));
+      dispatch(fetchProduct({ productId: props.item._id }));
   }
 
   function createSubcategory() {
@@ -156,7 +156,7 @@ const ProductEditor = (props: EditorProps) => {
                 {attributeToChange === "addSize" ? (
                   <input
                     autoFocus
-                    onChange={(e: any) =>
+                    onChange={(e) =>
                       setCurrentInputValue({ size: e.target.value })
                     }
                     type="text"
@@ -166,7 +166,7 @@ const ProductEditor = (props: EditorProps) => {
                   <input
                     style={{ width: "200px" }}
                     autoFocus
-                    onChange={(e: any) =>
+                    onChange={(e) =>
                       setCurrentInputValue({ color: e.target.value })
                     }
                     type="color"

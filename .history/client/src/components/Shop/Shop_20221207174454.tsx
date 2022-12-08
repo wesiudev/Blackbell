@@ -66,7 +66,7 @@ const Shop = () => {
   }));
 
   const arrayOfPrimaryImages = products?.data?.map((product: IProduct) => ({
-    productId: product?._id,
+    productId: product._id,
     image: product?.itemImages.filter(
       (image: Image) => image._id === product.primaryImage
     ),
@@ -118,15 +118,15 @@ const Shop = () => {
     });
   }
   window.addEventListener("resize", () => {
-    setNavOffsetRight(feedOffsetLeft?.current?.offsetLeft!);
+    setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!);
   });
 
   useEffect(() => {
-    setNavOffsetRight(feedOffsetLeft?.current?.offsetLeft!);
+    setNavOffsetRight(feedOffsetLeft.current?.offsetLeft!);
   }, []);
   return (
     <div className="shop">
-      {downloadedImg?.isOpen && (
+      {downloadedImg.isOpen && (
         <>
           <div className="fullHDPreview">
             {downloadedImg.isLoading && <ItemLoader loaderStyle="fixed" />}

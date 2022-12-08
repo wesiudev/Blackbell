@@ -166,7 +166,7 @@ const ProductEditor = (props: EditorProps) => {
                   <input
                     style={{ width: "200px" }}
                     autoFocus
-                    onChange={(e: any) =>
+                    onChange={(e) =>
                       setCurrentInputValue({ color: e.target.value })
                     }
                     type="color"

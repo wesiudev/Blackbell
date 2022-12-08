@@ -126,7 +126,7 @@ const Shop = () => {
   }, []);
   return (
     <div className="shop">
-      {downloadedImg?.isOpen && (
+      {downloadedImg.isOpen && (
         <>
           <div className="fullHDPreview">
             {downloadedImg.isLoading && <ItemLoader loaderStyle="fixed" />}

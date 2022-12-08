@@ -13,6 +13,7 @@ type ChosenImg = {
 
 const Editor = (props: Editor) => {
   //ref to img
+  const imageRef = useRef<HTMLImageElement>(null);
   const imagePreviewRef = useRef<HTMLImageElement>(null);
   //image translateX limits
   const [imagePreviewLimits, setImagePreviewLimits] = useState<{
