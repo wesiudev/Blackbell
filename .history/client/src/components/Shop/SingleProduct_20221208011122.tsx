@@ -30,7 +30,7 @@ const SingleProduct = () => {
           {product?._id === productId ? (
             <>
               <div className="gallery">
-                <GallerySlider images={productImages!}/>
+                <GallerySlider images={productImages}/>
                   </div>
               <div className="productInfo">
               <Headline height="7vh" text={product?.itemName} />
