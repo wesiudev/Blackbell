@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://blackbellart.herokuapp.com/";
+const url = "https://blackbellart.herokuapp.com/";
 // const url = process.env.URL || "http://localhost:5000/";
 
 const API = axios.create({ baseURL: url });
