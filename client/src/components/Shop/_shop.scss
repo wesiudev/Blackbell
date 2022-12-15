@@ -330,7 +330,7 @@
 .singleProduct{
     width:70%;
     min-height: 100vh;
-    margin:160px auto 120px auto;
+    margin:165px auto 70px auto;
     @media screen and (min-width:1024px) and (max-width:1366px) {
         width:90vw;
     }
@@ -338,125 +338,94 @@
         width:90vw;
     }
     &__content{
-        width:100%;
         display:flex;
+        width:100%;
+        height:100%;
         @media screen and (max-width:1023px) { 
-            flex-direction: column-reverse;
+            flex-direction: column;
             min-height: 100vh;
             justify-content: space-around;
-            width:90vw;
+            width:100vw;
+        }
+        .thumbnails{    
+            width:110px;
+            height:max-content;
+            display: flex;
+            flex-direction: column;
+            .thumbnail{
+                margin-top:10px;
+                display: flex;
+                box-sizing: border-box;
+                justify-content: flex-start;
+                img{
+                    width:100%;
+                    border:3px solid transparent;
+                }
+                .active{
+                    box-shadow: 0px 0px 6px black;
+                }
+                
+            }
         }
         .gallery{
-            height: max-content;
-            display: flex;
-            width: max-content;
-            box-sizing: border-box;
-            padding:20px;
-            background-color: #38383899;
-            box-shadow: 0px 0px 6px black;
+            display:flex;
+            flex-direction: row;
+            width:60vw;
             position: relative;
-            height:75vh;
-            @media screen and (max-width:1023px) {
+            margin:0 16px;
+            .item{
                 width:100%;
-                height:90vh;
+                object-fit: contain;
+                img{
+                    width:100%;
+                    box-shadow: 0px 0px 5px black;
+                    object-fit: cover;
+                }
             }
-            .slider {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                overflow: hidden;
-              }
-              
-              .slider-container {
-                display: flex;
-                width: 100%;
-                height: 100%;
-                list-style: none;
-              }
-              
-              .slider-item {
-                width: 100%;
-                height: 100%;
-                flex-shrink: 0;
-              }
-              
-              .slider-item img {
-                width: 100%;
-                height: 100%;
-                object-fit:contain;
-              }
-              
-              .slider-button {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 50px;
-                height: 50px;
-                border: none;
-                border-radius: 50%;
-                background-color: rgba(0, 0, 0, 0.5);
-                color: white;
-                font-size: 30px;
-                cursor: pointer;
-              }
-              
-              .slider-button-previous {
-                left: 0;
-              }
-              
-              .slider-button-next {
-                right: 0;
-              }
-              
-              .slider-dots {
-                position: absolute;
-                bottom: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                height: 80px;
-                width: max-content;
+        }
+        .productInfo{
+            min-height:60vh;
+            width:40vw;
+            display:flex;
+            justify-content: center;
+            &__content{
+                width:100%;
                 display:flex;
                 justify-content: center;
-                align-items: center;
-                background-color: #38383899;
-                padding:5px 0;
-            }
-            
-            .slider-dot {
-                display:flex;
-                height: 100%;
-                padding:10px;
-                margin: 0;
-                
-                img{
-                    cursor: pointer;
-                    height:100%;
-                    border:1px solid transparent;
+                &-menu{
+                    width:90%;
+                    height:max-content;
+                    display:flex;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: relative;
+                    .item{
+                        cursor: pointer;
+                        z-index: 2;
+                        width:48%;
+                        height:55px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 18px;
+                    }
                 }
-                
-                .active {
-                  border:1px solid black;
-                  box-shadow:0px 0px 6px white;
+                &-marginElement{
+                    height:15px;
+                    width:48%;
+                    background-color: #b6b6b699;
                 }
-            }
-              
-        }
-    }
-    .productInfo{
-        width:100%;
-        h2{
-            width:80%;
-            margin: 55px auto;
-            text-align: left;
-            @media screen and (min-width:767px) and (max-width:1023px) {
-                text-align: center;
-                width: 80%;
-            }
-            @media screen and (max-width:766px) {
-                text-align: center;
-                width: 100%;
-            }
+                &-underMenu{
+                    padding:0 15px;
+                    background-color: #b6b6b699;
+                    width:100%;
+                    h2{
+                        font-weight: 300;
+                        width:100%;
+                    }
+                }
+            }    
         }
     }
 }

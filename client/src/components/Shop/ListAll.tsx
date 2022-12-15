@@ -1,13 +1,13 @@
 import { Image, IProduct } from "../../common/types/types";
 import cart from "../../common/images/cart.png";
 import preview from "../../common/images/hd.png";
-interface ListAll {
+export interface IListAll {
   products: IProduct[];
   downloadImage: Function;
   setQuery: Function;
 }
 
-const ListAll = (props: ListAll) => {
+const ListAll = (props: IListAll) => {
   const { products, downloadImage, setQuery } = props;
 
   return (
